@@ -1,9 +1,13 @@
 package fjnu.edu.cn.lotty.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,11 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import fjnu.edu.cn.lotty.R;
+import fjnu.edu.cn.lotty.activity.RegisterActivity;
+import fjnu.edu.cn.lotty.base.AppBaseFragment;
+import fjnu.edu.cn.lotty.data.ConstData;
+import fjnu.edu.cn.lotty.task.LoginTask;
+import fjnu.edu.cn.lotty.view.LoginActionBarView;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
 import momo.cn.edu.fjnu.androidutils.utils.DialogUtils;
 import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
@@ -26,7 +35,7 @@ import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
  * Created by GaoFei on 2016/3/7.
  */
 @ContentView(R.layout.fragment_login)
-public class LoginFragment extends BaseFragment{
+public class LoginFragment extends AppBaseFragment{
 
     public final String TAG = "LoginFragment";
     /**登陆按钮*/
@@ -38,9 +47,9 @@ public class LoginFragment extends BaseFragment{
     private EditText mEdtPassword;
     @ViewInject(R.id.img_user_head)
     private ImageView mImgUserHead;
-
     private String mUserName;
     private String mPasswd;
+    private LoginTask mLoginTask;
 
     @Nullable
     @Override
@@ -50,6 +59,11 @@ public class LoginFragment extends BaseFragment{
 
     @Override
     public void init() {
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setCustomView(new LoginActionBarView(getContext()));
+        }
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,28 +87,33 @@ public class LoginFragment extends BaseFragment{
 
     public void login(){
         DialogUtils.showLoadingDialog(getActivity(), false);
-        new AsyncTask<String, Integer, Integer>(){
+        mLoginTask = new LoginTask(new LoginTask.Callback() {
             @Override
-            protected Integer doInBackground(String... strings) {
-                try {
-                    java.util.concurrent.TimeUnit.MILLISECONDS.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Integer integer) {
+            public void onResult(int status) {
                 DialogUtils.closeLoadingDialog();
-                if(mUserName.equals("GaoFei") && mPasswd.equals("123456")){
-                    getActivity().setResult(Activity.RESULT_OK);
+                if(status == ConstData.TaskResult.SUCC){
+                    Intent resultData = new Intent();
+                    resultData.putExtra(ConstData.IntentKey.USER_NAME, mUserName);
+                    getActivity().setResult(Activity.RESULT_OK, resultData);
                     getActivity().finish();
                 }else{
-                    ToastUtils.showToast("用户名或密码错误");
+                    ToastUtils.showToast(getString(R.string.login_failed));
                 }
-
             }
-        }.execute();
+        });
+        mLoginTask.execute(mUserName, mPasswd);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //makeActionBarCenterText();
+        //mTextRegister = addActionBarRightText(getString(R.string.register));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //removeActionBarText(mTextRegister);
     }
 }

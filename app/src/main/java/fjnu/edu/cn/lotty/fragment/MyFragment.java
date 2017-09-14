@@ -1,10 +1,12 @@
 package fjnu.edu.cn.lotty.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import fjnu.edu.cn.lotty.activity.SuggestionActivity;
 import fjnu.edu.cn.lotty.base.AppBaseFragment;
 import fjnu.edu.cn.lotty.data.ConstData;
 import momo.cn.edu.fjnu.androidutils.utils.DialogUtils;
+import momo.cn.edu.fjnu.androidutils.utils.StorageUtils;
 import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
 
 /**
@@ -59,12 +62,27 @@ public class MyFragment extends AppBaseFragment {
 
     @Override
     public void init(){
+        mIsLogin = !TextUtils.isEmpty(StorageUtils.getDataFromSharedPreference(ConstData.IntentKey.USER_NAME));
         if(mIsLogin)
-            mTextLogin.setText("GaoFei");
+            mTextLogin.setText(StorageUtils.getDataFromSharedPreference(ConstData.IntentKey.USER_NAME));
         mImgHeadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mIsLogin){
+                    new AlertDialog.Builder(getContext()).setTitle("温馨提示").setMessage("退出当前帐号?").setCancelable(false)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mIsLogin = false;
+                                    mTextLogin.setText(getString(R.string.click_login));
+                                    StorageUtils.saveDataToSharedPreference(ConstData.IntentKey.USER_NAME, "");
+                                }
+                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
                     return;
                 }
                 startActivityForResult(new Intent(getActivity(), LoginActivity.class), 1000);
@@ -121,9 +139,11 @@ public class MyFragment extends AppBaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1000 && resultCode == Activity.RESULT_OK){
-            ToastUtils.showToast("登录成功");
+            ToastUtils.showToast(getString(R.string.login_succ));
             mIsLogin = true;
-            mTextLogin.setText("GaoFei");
+            String userName = data.getStringExtra(ConstData.IntentKey.USER_NAME);
+            StorageUtils.saveDataToSharedPreference(ConstData.SharedKey.USER_NAME, userName);
+            mTextLogin.setText(userName);
         }
     }
 }

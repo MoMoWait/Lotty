@@ -41,4 +41,5 @@ dependencies {
     compile 'org.xutils:xutils:3.5.0'
     compile 'cn.jiguang.sdk:jpush:3.0.3'
     compile 'cn.jiguang.sdk:jcore:1.1.1'
+    compile files('libs/mysql-connector-java-5.0.8-bin.jar')
 }

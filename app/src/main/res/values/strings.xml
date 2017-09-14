@@ -60,4 +60,9 @@
     <string name="message_center">消息中心</string>
     <string name="suggestion_feedback">意见反馈</string>
     <string name="about_we">关于我们</string>
+    <string name="register_failed">注册失败，请检查网络或更换用户名</string>
+    <string name="login_failed">登录失败</string>
+    <string name="login_succ">登录成功</string>
+    <string name="suggestion_succ">反馈成功</string>
+    <string name="suggestion_failed">反馈失败</string>
 </resources>

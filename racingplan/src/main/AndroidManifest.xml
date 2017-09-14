@@ -34,7 +34,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="cn.edu.fjnu.racingplan.activity.BrowserActivity" >
+        <activity
+            android:name="cn.edu.fjnu.racingplan.activity.BrowserActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

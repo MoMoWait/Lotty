@@ -15,6 +15,9 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import fjnu.edu.cn.lotty.R;
+import fjnu.edu.cn.lotty.data.ConstData;
+import fjnu.edu.cn.lotty.task.RegisterUserTask;
+import fjnu.edu.cn.lotty.task.SuggestionUploadTask;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
 import momo.cn.edu.fjnu.androidutils.utils.DialogUtils;
 import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
@@ -35,6 +38,8 @@ public class SuggestionFragment extends BaseFragment {
     @ViewInject(R.id.btn_suggestion)
     private Button mBtnSuggestion;
 
+    private SuggestionUploadTask mLoadTask;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -53,24 +58,20 @@ public class SuggestionFragment extends BaseFragment {
                     return;
                 }
                 DialogUtils.showLoadingDialog(getActivity(), false);
-                new AsyncTask<String, Integer, Integer>(){
+                mLoadTask = new SuggestionUploadTask(new RegisterUserTask.Callback() {
                     @Override
-                    protected Integer doInBackground(String... strings) {
-                        try {
-                            java.util.concurrent.TimeUnit.MILLISECONDS.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Integer integer) {
+                    public void onResult(int status) {
                         DialogUtils.closeLoadingDialog();
-                        ToastUtils.showToast("反馈成功");
-                        getActivity().finish();
+                        if(status == ConstData.TaskResult.SUCC){
+                            ToastUtils.showToast(getString(R.string.suggestion_succ));
+                            getActivity().finish();
+                        }else{
+                            ToastUtils.showToast(getString(R.string.suggestion_failed));
+                        }
                     }
-                }.execute();
+                });
+                mLoadTask.execute(suggestion, phone);
+
             }
         });
     }
