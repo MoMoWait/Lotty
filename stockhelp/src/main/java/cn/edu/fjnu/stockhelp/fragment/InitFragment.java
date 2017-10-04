@@ -57,7 +57,7 @@ public class InitFragment extends BaseFragment{
         mContentTask = new ContentLoadTask(new ContentLoadTask.Callback() {
             @Override
             public void onResult(int status, String url) {
-                //ToastUtils.showToast("内容加载:" + status);
+               // ToastUtils.showToast("内容加载:" + status + "  " + url);
                 if(url != null){
                     //跳转至指定的网页
                     Intent intent = new Intent(getActivity(), BrowserActivity.class);

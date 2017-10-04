@@ -3,6 +3,7 @@ package fjnu.edu.cn.lotty.view;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import fjnu.edu.cn.lotty.R;
+import fjnu.edu.cn.lotty.data.ConstData;
 import momo.cn.edu.fjnu.androidutils.utils.SizeUtils;
 
 /**
@@ -27,7 +29,8 @@ public class TabItemView extends LinearLayout {
     private ImageView mImgBottom;
     @ViewInject(R.id.text_des)
     private TextView mTextDes;
-
+    @ViewInject(R.id.layout_container)
+    private LinearLayout mLayoutContainer;
     public TabItemView(Context context) {
         super(context);
         init(context);
@@ -52,9 +55,8 @@ public class TabItemView extends LinearLayout {
         mContext = context;
         setOrientation(LinearLayout.VERTICAL);
         inflate(mContext, R.layout.view_tab_item, this);
-        //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        //addView(itemView, params);
         x.view().inject(this);
+        hideText();
     }
 
     public void setImgText(int bottomImg, String textDes){
@@ -68,5 +70,21 @@ public class TabItemView extends LinearLayout {
 
     public void setBottomImg(int resImg){
         mImgBottom.setImageResource(resImg);
+    }
+
+    /**
+     * 隐藏文字
+     */
+    private void hideText(){
+        if(!ConstData.IS_SHOW_TAB_TEXT){
+            mTextDes.setVisibility(View.GONE);
+            mImgBottom.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            mLayoutContainer.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams imgParams = (LinearLayout.LayoutParams)mImgBottom.getLayoutParams();
+            imgParams.width = SizeUtils.dp2px(60);
+            imgParams.height = SizeUtils.dp2px(60);
+            mImgBottom.setLayoutParams(imgParams);
+        }
+
     }
 }

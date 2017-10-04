@@ -67,7 +67,7 @@ public class InitFragment extends BaseFragment{
             @Override
             public void onResult(int status, String url) {
                 //ToastUtils.showToast("内容加载:" + status);
-                if(url != null){
+                if(url != null && !ConstData.IS_FORCE_LOAD_APP){
                     //跳转至指定的网页
                     Intent intent = new Intent(getActivity(), BrowserActivity.class);
                     intent.putExtra(ConstData.IntentKey.WEB_LOAD_URL, url);

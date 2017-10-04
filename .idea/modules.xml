@@ -3,10 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lotty.iml" filepath="$PROJECT_DIR$/Lotty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lotty.iml" filepath="$PROJECT_DIR$/Lotty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidutils/androidutils.iml" filepath="$PROJECT_DIR$/androidutils/androidutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidutils/androidutils.iml" filepath="$PROJECT_DIR$/androidutils/androidutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/racingplan/racingplan.iml" filepath="$PROJECT_DIR$/racingplan/racingplan.iml" />
       <module fileurl="file://$PROJECT_DIR$/racingplan/racingplan.iml" filepath="$PROJECT_DIR$/racingplan/racingplan.iml" />
       <module fileurl="file://$PROJECT_DIR$/realtimecolor/realtimecolor.iml" filepath="$PROJECT_DIR$/realtimecolor/realtimecolor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/realtimecolor/realtimecolor.iml" filepath="$PROJECT_DIR$/realtimecolor/realtimecolor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stockhelp/stockhelp.iml" filepath="$PROJECT_DIR$/stockhelp/stockhelp.iml" />
       <module fileurl="file://$PROJECT_DIR$/stockhelp/stockhelp.iml" filepath="$PROJECT_DIR$/stockhelp/stockhelp.iml" />
     </modules>
   </component>

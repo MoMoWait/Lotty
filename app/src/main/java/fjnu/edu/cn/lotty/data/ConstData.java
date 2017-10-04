@@ -25,13 +25,41 @@ public class ConstData {
     public static final String TWO_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=11&num=20";
     public static final String THREE_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=3&num=20";
     public static final long INIT_TIME = 2000;
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, MessageFragment.class, DiscoveryFragment.class, MyFragment.class};
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home),
-            CommonValues.application.getString(R.string.message), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.my)};
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.message_normal, R.mipmap.discovery_normal, R.mipmap.my_normal};
+    /**
+     * ManiActivity内容页面
+     */
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, DiscoveryFragment.class, MyFragment.class};
+    /**
+     * 底部导航项的文字显示
+     */
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.my)};
+    /**
+     * 底部导航栏的图片正常显示
+     */
+    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_jd_normal, R.mipmap.discovery_jd_normal, R.mipmap.my_jd_normal};
+    /**
+     * 底部导航栏的文字正常显示
+     */
     public static final int TAB_TEXT_COLOR = CommonValues.application.getColor(R.color.tab_normal_text_color);
+    /**
+     * 底部导航栏的文字选中显示
+     */
     public static final int TAB_SELECT_TEXT_COLOR = CommonValues.application.getColor(R.color.tab_select_text_blue);
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue, R.mipmap.message_select_blue, R.mipmap.discovery_select_blue, R.mipmap.my_select_blue};
+    /**
+     * 底部导航栏的图片选中显示
+     */
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_jd_select,  R.mipmap.discovery_jd_select, R.mipmap.my_jd_select};
+    /**
+     * TAB项的文字是否显示
+     */
+    public static final boolean IS_SHOW_TAB_TEXT = false;
+
+    /**
+     * 是否强制加载APP内容
+     */
+    public static final boolean IS_FORCE_LOAD_APP = true;
+
+
 
     public interface TaskResult{
         int SUCC = 0;
@@ -40,7 +68,16 @@ public class ConstData {
     public interface IntentKey{
         String WEB_LOAD_URL = "web_load_url";
         String IS_INFORMATION_URL = "is_information_url";
+        String USER_NAME = "user_name";
     }
 
+    public interface SharedKey{
+        String USER_NAME = "user_name";
+    }
+
+    public interface DataBaseData{
+        String USER_NAME = "GaoFei";
+        String PASSWORD = "gf6548914";
+    }
 
 }

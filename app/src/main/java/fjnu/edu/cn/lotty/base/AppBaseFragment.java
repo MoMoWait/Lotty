@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import fjnu.edu.cn.lotty.R;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
@@ -30,5 +31,46 @@ public abstract class AppBaseFragment extends BaseFragment {
         textTitle.setGravity(Gravity.CENTER);
         textTitle.setLayoutParams(params);
 
+    }
+
+    /**
+     * 使中间标题栏居中
+     */
+    public void makeActionBarCenterText(){
+        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
+        ViewGroup.LayoutParams params = textTitle.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        textTitle.setGravity(Gravity.CENTER);
+        textTitle.setLayoutParams(params);
+    }
+
+    /**
+     * 添加右侧文字
+     */
+    public TextView addActionBarRightText(String text){
+        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
+        float titleSize = textTitle.getTextSize();
+        int titleColor = textTitle.getCurrentTextColor();
+        TextView rightTextView = new TextView(getContext());
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        rightTextView.setLayoutParams(params);
+        rightTextView.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        rightTextView.setTextSize(titleSize * 0.8f);
+        rightTextView.setTextColor(titleColor);
+        rightTextView.setText(text);
+        toolbar.addView(rightTextView);
+        return rightTextView;
+    }
+
+    /**
+     * 移除右侧文字
+     * @param rightTextView
+     */
+    public void removeActionBarText(TextView rightTextView){
+        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        toolbar.removeView(rightTextView);
     }
 }

@@ -2,6 +2,7 @@ package cn.edu.fjnu.stockhelp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
 
 @ContentView(R.layout.fragment_browser)
 public class BrowserFragment extends BaseFragment {
-
+    private static final String TAG = "BrowserFragment";
     @ViewInject(R.id.web_info)
     private WebView mWebInfo;
 
@@ -76,6 +77,7 @@ public class BrowserFragment extends BaseFragment {
 
     public void initData() {
         mLoadUrl = getActivity().getIntent().getStringExtra(ConstData.IntentKey.WEB_LOAD_URL);
+        Log.i(TAG, "initData->mLoadUrl:" + mLoadUrl);
         boolean isInformationUrl = getActivity().getIntent().getBooleanExtra(ConstData.IntentKey.IS_INFORMATION_URL, false);
         if(isInformationUrl)
             mLoadUrl += "?from=client";

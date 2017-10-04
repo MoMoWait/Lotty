@@ -16,6 +16,7 @@ public class ConstData {
     public static final String ONE_COLOR_URL = "http://m.13322.com/mlottery/core/detailedLotteryResults.findPK10DetailedResults.do?_=1503539785.201749&appType=1&appno=11&deviceId=072FAF2EA6AC41F0896CA6FE1489669C&deviceToken=&lang=zh&loginToken=&sign=1cc9c9759d04cf9768dcda2a58b9d74403&timeZone=8&userId=&version=240";
     public static final String TWO_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=11&num=20";
     public static final String THREE_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=3&num=20";
+
     public static final long INIT_TIME = 2000;
     public interface TaskResult{
         int SUCC = 0;
