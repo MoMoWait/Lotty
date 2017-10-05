@@ -23,6 +23,11 @@ public class LoginTask extends AsyncTask<String, Integer, Integer> {
 
     private Callback mCallback;
 
+
+    public LoginTask(){
+
+    }
+
     public LoginTask(Callback callback){
         mCallback = callback;
     }
@@ -63,5 +68,9 @@ public class LoginTask extends AsyncTask<String, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         mCallback.onResult(result);
+    }
+
+    public Integer login(String userName, String passwd){
+        return doInBackground(userName, passwd);
     }
 }

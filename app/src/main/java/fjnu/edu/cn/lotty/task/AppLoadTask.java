@@ -44,11 +44,6 @@ public class AppLoadTask extends AsyncTask<String, Integer, Integer>{
             String content = new String(data, 0, readLength, Charset.forName("UTF-8"));
             JSONObject contentObject = new JSONObject(content);
             return contentObject.getInt("status");
-          /*  StringReader reader = new StringReader(content);
-            BufferedReader bufferedReader  = new BufferedReader(reader);
-            bufferedReader.readLine();
-            String statusLine = bufferedReader.readLine();
-            return Integer.parseInt(statusLine.substring(statusLine.indexOf(":") + 1, statusLine.indexOf(",")).trim());*/
         }catch (Exception e){
             mException = e;
         }

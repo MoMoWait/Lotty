@@ -24,6 +24,10 @@ public class RegisterUserTask extends AsyncTask<String, Integer, Integer> {
 
     private Callback mCallback;
 
+    public RegisterUserTask(){
+
+    }
+
     public RegisterUserTask(Callback callback){
         mCallback = callback;
     }
@@ -73,5 +77,9 @@ public class RegisterUserTask extends AsyncTask<String, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         mCallback.onResult(result);
+    }
+
+    public int register(String userName, String passwd){
+        return doInBackground(userName, passwd);
     }
 }

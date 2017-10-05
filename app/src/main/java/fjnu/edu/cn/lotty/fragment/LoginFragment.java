@@ -22,9 +22,16 @@ import org.xutils.x;
 import fjnu.edu.cn.lotty.R;
 import fjnu.edu.cn.lotty.activity.RegisterActivity;
 import fjnu.edu.cn.lotty.base.AppBaseFragment;
+import fjnu.edu.cn.lotty.bean.UserInfo;
 import fjnu.edu.cn.lotty.data.ConstData;
 import fjnu.edu.cn.lotty.task.LoginTask;
 import fjnu.edu.cn.lotty.view.LoginActionBarView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
 import momo.cn.edu.fjnu.androidutils.utils.DialogUtils;
 import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
@@ -87,9 +94,19 @@ public class LoginFragment extends AppBaseFragment{
 
     public void login(){
         DialogUtils.showLoadingDialog(getActivity(), false);
-        mLoginTask = new LoginTask(new LoginTask.Callback() {
+        mLoginTask = new LoginTask();
+        UserInfo info = new UserInfo();
+        info.setUserName(mUserName);
+        info.setPasswd(mPasswd);
+        Observable.just(info).map(new Function<UserInfo, Integer>() {
             @Override
-            public void onResult(int status) {
+            public Integer apply(@NonNull UserInfo userInfo) throws Exception {
+                mLoginTask = new LoginTask();
+                return mLoginTask.login(userInfo.getUserName(), userInfo.getPasswd());
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer status) throws Exception {
                 DialogUtils.closeLoadingDialog();
                 if(status == ConstData.TaskResult.SUCC){
                     Intent resultData = new Intent();
@@ -101,7 +118,7 @@ public class LoginFragment extends AppBaseFragment{
                 }
             }
         });
-        mLoginTask.execute(mUserName, mPasswd);
+
     }
 
     @Override
