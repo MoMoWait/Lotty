@@ -65,14 +65,7 @@ public class RegisterFragment extends AppBaseFragment {
     @Override
     public void init() {
         mRegisterTask = new RegisterUserTask();
-        RxView.clicks(mBtnRegister).throttleFirst(2000, TimeUnit.SECONDS).subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object o) throws Exception {
-                ToastUtils.showToast("Btn class name:" + o.getClass().getName());
-                ToastUtils.showToast("click register button");
-            }
-        });
-/*        mBtnRegister.setOnClickListener(new View.OnClickListener() {
+        mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String userName = mEditUserName.getText().toString().trim();
@@ -109,6 +102,6 @@ public class RegisterFragment extends AppBaseFragment {
                             }
                         });
             }
-        });*/
+        });
     }
 }
