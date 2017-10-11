@@ -20,6 +20,7 @@ public class AppLoadTask extends AsyncTask<String, Integer, Integer>{
 
     public interface Callback{
         void onResult(int status);
+        void showNetworkError();
     }
 
     private Callback mCallback;
@@ -42,11 +43,6 @@ public class AppLoadTask extends AsyncTask<String, Integer, Integer>{
             String content = new String(data, 0, readLength, Charset.forName("UTF-8"));
             JSONObject contentObject = new JSONObject(content);
             return contentObject.getInt("status");
-          /*  StringReader reader = new StringReader(content);
-            BufferedReader bufferedReader  = new BufferedReader(reader);
-            bufferedReader.readLine();
-            String statusLine = bufferedReader.readLine();
-            return Integer.parseInt(statusLine.substring(statusLine.indexOf(":") + 1, statusLine.indexOf(",")).trim());*/
         }catch (Exception e){
             mException = e;
         }
@@ -57,8 +53,9 @@ public class AppLoadTask extends AsyncTask<String, Integer, Integer>{
     @Override
     protected void onPostExecute(Integer result) {
         if(mException != null)
-            ToastUtils.showToast("发生异常:" + mException);
-        mCallback.onResult(result);
+            mCallback.showNetworkError();
+        else
+            mCallback.onResult(result);
 
     }
 }

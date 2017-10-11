@@ -1,0 +1,76 @@
+package fjnu.edu.cn.beijingquickthree.task;
+
+import android.os.AsyncTask;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import fjnu.edu.cn.beijingquickthree.data.ConstData;
+import momo.cn.edu.fjnu.androidutils.utils.PackageUtils;
+
+/**
+ * Created by Administrator on 2017\9\14 0014.
+ * 登录验证模块
+ */
+
+public class LoginTask extends AsyncTask<String, Integer, Integer> {
+    public interface Callback{
+        void onResult(int status);
+    }
+
+    private Callback mCallback;
+
+
+    public LoginTask(){
+
+    }
+
+    public LoginTask(Callback callback){
+        mCallback = callback;
+    }
+
+    @Override
+    protected Integer doInBackground(String... strings) {
+        String userName = strings[0];
+        String passwd = strings[1];
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+        }catch (Exception e){
+            return ConstData.TaskResult.FAILED;
+        }
+        String url = "jdbc:mysql://120.24.18.183:3306/Lotty";
+        try {
+            Connection connection = DriverManager.getConnection(url, ConstData.DataBaseData.USER_NAME, ConstData.DataBaseData.PASSWORD);
+            //搜索用户表
+            PreparedStatement selectPrepareStatement = connection.prepareStatement("select * from User where userName=? and password=? and packageName=?");
+            selectPrepareStatement.setString(1, userName);
+            selectPrepareStatement.setString(2, passwd);
+            selectPrepareStatement.setString(3, PackageUtils.getPackageName());
+            ResultSet selectSet = selectPrepareStatement.executeQuery();
+            if(selectSet.first()){
+                selectSet.close();
+                selectPrepareStatement.close();
+                connection.close();
+                return ConstData.TaskResult.SUCC;
+            }
+            selectSet.close();
+            selectPrepareStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            return ConstData.TaskResult.FAILED;
+        }
+        return ConstData.TaskResult.FAILED;
+    }
+
+    @Override
+    protected void onPostExecute(Integer result) {
+        mCallback.onResult(result);
+    }
+
+    public Integer login(String userName, String passwd){
+        return doInBackground(userName, passwd);
+    }
+}

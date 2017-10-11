@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:scaleType="centerInside"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/img_default_head"/>
+        android:src="@mipmap/ic_launcher"/>
 
     <EditText
         android:id="@+id/edt_user_name"

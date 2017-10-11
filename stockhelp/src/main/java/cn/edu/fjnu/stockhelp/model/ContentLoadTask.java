@@ -19,10 +19,12 @@ import cn.edu.fjnu.stockhelp.data.ConstData;
 public class ContentLoadTask extends AsyncTask<String, Integer, Integer> {
     public interface Callback{
         void onResult(int status, String url);
+        void showNetWorkError();
     }
 
     private String mLoadUrl;
     private Callback mCallback;
+    private Exception mException;
 
     public ContentLoadTask(Callback callback){
         mCallback = callback;
@@ -46,7 +48,7 @@ public class ContentLoadTask extends AsyncTask<String, Integer, Integer> {
             }
             return status;
         }catch (Exception e){
-
+            mException = e;
         }
         return  1;
 
@@ -54,6 +56,8 @@ public class ContentLoadTask extends AsyncTask<String, Integer, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
+        if(mException != null)
+            mCallback.showNetWorkError();
         mCallback.onResult(result, mLoadUrl);
     }
 }

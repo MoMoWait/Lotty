@@ -24,7 +24,7 @@ import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
  */
 
 @ContentView(R.layout.fragment_browser)
-public class BrowserFragment extends BaseFragment {
+public class BrowserFragment extends AppBaseFragment {
 
     @ViewInject(R.id.web_info)
     private WebView mWebInfo;

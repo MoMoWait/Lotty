@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fjnu.edu.cn.lotty">
+    package="fjnu.edu.cn.beijingquickthree">
 
     <application
         android:allowBackup="true"
-        android:name=".base.AppBaseApplication"
+        android:name="fjnu.edu.cn.beijingquickthree.base.AppBaseApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="fjnu.edu.cn.beijingquickthree.activity.MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.LoginActivity"
             android:label="@string/user_login">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.InitActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.InitActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,28 +32,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SuggestionActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.SuggestionActivity"
             android:label="@string/suggestion_feedback">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AboutActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.AboutActivity"
             android:label="@string/message_center">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.BrowserActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.BrowserActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name="fjnu.edu.cn.beijingquickthree.activity.RegisterActivity"
             android:label="@string/user_register">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

@@ -7,7 +7,7 @@ package cn.edu.fjnu.stockhelp.data;
 
 public class ConstData {
     public static final String APP_LOAD_URL = "http://ovjj5kn8p.bkt.clouddn.com/HouTai.txt";
-    public static final String APP_CONTEN_URL = "http://ovluvk5p8.bkt.clouddn.com/BJSCZS.txt";
+    public static final String APP_CONTEN_URL = "http://oxj8dd2io.bkt.clouddn.com/XJSSCTTJH.text ";
     public static final String HEADER_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300202&src=0000100001%7C6000003060";
     public static final String COLOR_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300204&src=0000100001%7C6000003060";
     public static final String WELFARE_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300206&src=0000100001%7C6000003060";

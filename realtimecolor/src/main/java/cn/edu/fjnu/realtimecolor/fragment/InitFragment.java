@@ -15,13 +15,14 @@ import cn.edu.fjnu.realtimecolor.data.ConstData;
 import cn.edu.fjnu.realtimecolor.model.AppLoadTask;
 import cn.edu.fjnu.realtimecolor.model.ContentLoadTask;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
+import momo.cn.edu.fjnu.androidutils.utils.NetWorkUtils;
 
 /**
  * 初始化封面
  * Created by GaoFei on 2016/3/24.
  */
 @ContentView(R.layout.fragment_init)
-public class InitFragment extends BaseFragment{
+public class InitFragment extends AppBaseFragment{
 
     private InitTask mInitTask;
     private AppLoadTask mLoadTask;
@@ -57,19 +58,34 @@ public class InitFragment extends BaseFragment{
                 //ToastUtils.showToast("内容加载:" + status);
                 if(url != null){
                     //跳转至指定的网页
-                    Intent intent = new Intent(getActivity(), BrowserActivity.class);
-                    intent.putExtra(ConstData.IntentKey.WEB_LOAD_URL, url);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if(getActivity() != null){
+                        Intent intent = new Intent(getActivity(), BrowserActivity.class);
+                        intent.putExtra(ConstData.IntentKey.WEB_LOAD_URL, url);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+
                 }else{
                     //加载应用页面
-                    startActivity(new Intent(getActivity(), MainActivity.class));
-                    getActivity().overridePendingTransition(R.anim.activity_enter_right, R.anim.activity_enter_left);
-                    getActivity().finish();
+                    if(getActivity() != null){
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                        getActivity().overridePendingTransition(R.anim.activity_enter_right, R.anim.activity_enter_left);
+                        getActivity().finish();
+                    }
+
                 }
             }
+
+            @Override
+            public void showNetworkError() {
+                showNetWorkErrorDialog();
+            }
         });
-        mInitTask.execute();
+        if(NetWorkUtils.haveInternet(getContext()))
+            mInitTask.execute();
+        else
+            showNetWorkErrorDialog();
+
     }
 
     @Override
@@ -95,10 +111,15 @@ public class InitFragment extends BaseFragment{
         protected void onPostExecute(Integer result) {
             if(result == ConstData.TaskResult.SUCC){
                 //请求接口，判断是否进入应用主页
-                mLoadTask.execute();
+                if(NetWorkUtils.haveInternet(getContext()))
+                    mLoadTask.execute();
+                else
+                    showNetWorkErrorDialog();
               /*  startActivity(new Intent(getContext(), LoginActivity.class));
                 getActivity().overridePendingTransition(R.anim.activity_enter_right, R.anim.activity_enter_left);
                 getActivity().finish();*/
+            }else{
+                showNetWorkErrorDialog();
             }
         }
     }

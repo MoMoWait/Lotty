@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#ebebeb">
+
+    <EditText
+        android:id="@+id/edit_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/common_edit_background"
+        android:hint="输入反馈/建议"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/edit_phone"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/common_edit_background"
+        android:hint="QQ/电话"
+        android:paddingLeft="10dp"
+        android:inputType="number"
+        android:textColor="@color/black"/>
+    <Button
+        android:id="@+id/btn_suggestion"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
+        android:background="@drawable/common_btn_background"
+        android:text="一键反馈"
+        android:textSize="18sp"
+        android:textColor="@color/white" />
+</LinearLayout>

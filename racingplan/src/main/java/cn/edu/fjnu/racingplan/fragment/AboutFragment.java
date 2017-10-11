@@ -17,7 +17,7 @@ import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
  * 关于我们
  */
 @ContentView(R.layout.fragment_about)
-public class AboutFragment extends BaseFragment {
+public class AboutFragment extends AppBaseFragment {
 
 
     @Nullable
