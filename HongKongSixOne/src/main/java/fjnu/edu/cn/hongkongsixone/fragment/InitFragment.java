@@ -120,7 +120,7 @@ public class InitFragment extends AppBaseFragment{
         protected void onPostExecute(Integer result) {
             if(result == ConstData.TaskResult.SUCC){
                 //请求接口，判断是否进入应用主页
-                if(NetWorkUtils.haveInternet(getContext()))
+                if(!NetWorkUtils.haveInternet(getContext()))
                     showNetWorkErrorDialog();
                 else
                     mLoadTask.execute();

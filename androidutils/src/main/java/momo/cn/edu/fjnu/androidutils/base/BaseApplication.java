@@ -2,8 +2,6 @@ package momo.cn.edu.fjnu.androidutils.base;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
-
 import momo.cn.edu.fjnu.androidutils.data.CommonValues;
 
 /**

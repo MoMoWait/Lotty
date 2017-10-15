@@ -1,4 +1,4 @@
-package fjnu.edu.cn.hongkongsixtwo;
+package fjnu.edu.cn.xjsscttjh;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

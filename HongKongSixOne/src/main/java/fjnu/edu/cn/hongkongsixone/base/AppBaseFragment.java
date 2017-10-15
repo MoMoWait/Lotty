@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -75,6 +76,7 @@ public abstract class AppBaseFragment extends BaseFragment {
     }
 
     public void showNetWorkErrorDialog(){
+        Log.i(TAG, "showNetWorkErrorDialog->logs:" + Log.getStackTraceString(new Throwable()));
         if(getActivity() != null){
             new AlertDialog.Builder(getContext()).setCancelable(false).setTitle("温馨提示")
                     .setMessage("请检查网络").setPositiveButton("确定", new DialogInterface.OnClickListener() {

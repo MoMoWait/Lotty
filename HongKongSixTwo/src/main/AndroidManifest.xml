@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fjnu.edu.cn.hongkongsixtwo">
+    package="fjnu.edu.cn.xjsscttjh">
 
     <application
         android:allowBackup="true"
-        android:name="fjnu.edu.cn.hongkongsixtwo.base.AppBaseApplication"
+        android:name="fjnu.edu.cn.xjsscttjh.base.AppBaseApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.MainActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.LoginActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.LoginActivity"
             android:label="@string/user_login"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.InitActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.InitActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.SuggestionActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.SuggestionActivity"
             android:label="@string/suggestion_feedback"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.AboutActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.AboutActivity"
             android:label="@string/message_center"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.BrowserActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.BrowserActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fjnu.edu.cn.hongkongsixtwo.activity.RegisterActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.RegisterActivity"
             android:label="@string/user_register"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ChartActivity"
+            android:name="fjnu.edu.cn.xjsscttjh.activity.ChartActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>

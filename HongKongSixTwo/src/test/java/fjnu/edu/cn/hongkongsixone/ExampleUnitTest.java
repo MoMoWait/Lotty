@@ -1,4 +1,4 @@
-package fjnu.edu.cn.hongkongsixtwo;
+package fjnu.edu.cn.xjsscttjh;
 
 import org.junit.Test;
 

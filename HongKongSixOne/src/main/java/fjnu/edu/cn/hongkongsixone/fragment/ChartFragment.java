@@ -2,7 +2,18 @@ package fjnu.edu.cn.hongkongsixone.fragment;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
+import org.xutils.view.annotation.ViewInject;
+
+import fjnu.edu.cn.hongkongsixone.R;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -13,14 +24,19 @@ import android.webkit.WebView;
 
 public class ChartFragment extends BrowserFragment{
 
+
+    @ViewInject(R.id.progress_load)
+    private ProgressBar mProgressLoad;
+
     @Override
     public void pageStarted(WebView view, String url, Bitmap favicon) {
         view.setVisibility(View.GONE);
+        mProgressLoad.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void pageFinished(WebView view, String url) {
-        view.setVisibility(View.VISIBLE);
+    public void pageFinished(final WebView view, String url) {
+        //view.setVisibility(View.VISIBLE);
         String fun="javascript:function getClass(parent) { var aEle=parent.getElementsByTagName('div'); var aResult=[]; var i=0; for(i<0;i<aEle.length;i++) { if(aEle[i].id!='waitBox' && aEle[i].id!='chartLinediv') { aResult.push(aEle[i]); } }; return aResult; } ";
 
         view.loadUrl(fun);
@@ -30,6 +46,22 @@ public class ChartFragment extends BrowserFragment{
         view.loadUrl(fun2);
 
         view.loadUrl("javascript:hideOther();");
+
+        //mProgressLoad.setVisibility(View.VISIBLE);
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
+                Thread.sleep(1500);
+                e.onNext(new Object());
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
+                mProgressLoad.setVisibility(View.GONE);
+                view.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
 }

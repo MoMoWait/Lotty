@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "fjnu.edu.cn.hongkongsixtwo"
+        applicationId "fjnu.edu.cn.xjsscttjh"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -17,7 +17,7 @@ android {
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "786c049b9b0acb3b4a858aeb", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "32501938ff8b1dd363941071", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
