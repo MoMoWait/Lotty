@@ -4,8 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/fragment_background">
+    <TextView
+        android:id="@+id/text_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:text="视频暂不支持下载"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"/>
     <ListView
         android:id="@+id/list_videos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"/>
 </LinearLayout>

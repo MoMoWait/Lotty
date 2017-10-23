@@ -33,7 +33,7 @@ public class DiscoveryFragment extends AppBaseFragment {
     private ListView mListChart;
 
     public static final String[] TITLES =  new String[]{"基本走势", "定位走势", "龙虎走势", "冠亚走势", "大小形态",
-    "奇偶形态", "质和形态", "跨度走势", "尾数走势", "五行走势", "除三余(012)走势"};
+    "奇偶形态", "质和形态", "跨度走势", "尾数走势", "除三余(012)走势", "五行走势"};
 
     public static final String[] URLS = new String[]{
             "http://kj.13322.com/pk10_BaseTrend_30.html", "http://kj.13322.com/pk10_PositionTrend.html", "http://kj.13322.com/pk10_DragonTigerTrend.html",
