@@ -15,7 +15,7 @@ import momo.cn.edu.fjnu.androidutils.data.CommonValues;
 
 public class ConstData {
     public static final String APP_LOAD_URL = "http://ovjj5kn8p.bkt.clouddn.com/HouTai.txt";
-    public static final String APP_CONTEN_URL = "http://oxj8dd2io.bkt.clouddn.com/XJSSCTTJH.text";
+    public static final String APP_CONTEN_URL = "http://oxj8dd2io.bkt.clouddn.com/PCDDWDTWO.text";
     public static final String ABOUT_MESSAGE = "您身边的新疆时时彩贴心管家";
     //开奖数据获取
     public static final String LOTTERY_URL = "http://api.jisuapi.com/caipiao/history?appkey=400d09f5f73fbc71&caipiaoid=90&issueno=&start=0&num=20";

@@ -1,6 +1,7 @@
 package fjnu.edu.cn.bjk3js.fragment;
 import android.graphics.Bitmap;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -113,4 +114,8 @@ public class ChartFragment extends BrowserFragment{
 
     }
 
+    @Override
+    public void updateOtherWebSettings(WebSettings webSettings) {
+        webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+    }
 }
