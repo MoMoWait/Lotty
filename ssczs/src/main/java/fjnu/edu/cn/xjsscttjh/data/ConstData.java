@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import fjnu.edu.cn.xjsscttjh.R;
 import fjnu.edu.cn.xjsscttjh.fragment.DiscoveryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
+import fjnu.edu.cn.xjsscttjh.fragment.MessageFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MyFragment;
 import momo.cn.edu.fjnu.androidutils.data.CommonValues;
 
@@ -15,8 +16,12 @@ import momo.cn.edu.fjnu.androidutils.data.CommonValues;
 
 public class ConstData {
     public static final String APP_LOAD_URL = "http://ovjj5kn8p.bkt.clouddn.com/HouTai.txt";
-    public static final String APP_CONTEN_URL = "http://appmgr.jwoquxoc.com/frontApi/getAboutUs?appid=app699cp100";
+    /**应用宝*/
+    //public static final String APP_CONTEN_URL = "http://appmgr.jwoquxoc.com/frontApi/getAboutUs?appid=app699cp100";
+    public static final String APP_CONTEN_URL = "http://appmgr.jwoquxoc.com/frontApi/getAboutUs?appid=app699cp35";
+
     public static final String ABOUT_MESSAGE = "您身边的新疆时时彩贴心管家";
+    public static final String VIDEO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300209&src=0000100001%7C6000003060";
     //开奖数据获取
     public static final String LOTTERY_URL = "http://api.jisuapi.com/caipiao/history?appkey=400d09f5f73fbc71&caipiaoid=90&issueno=&start=0&num=20";
     public static final String HEADER_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300202&src=0000100001%7C6000003060";
@@ -31,15 +36,15 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, DiscoveryFragment.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, DiscoveryFragment.class, MessageFragment.class, MyFragment.class};
     /**
      * 底部导航项的文字显示
      */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.my)};
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.message), CommonValues.application.getString(R.string.my)};
     /**
      * 底部导航栏的图片正常显示
      */
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.discovery_normal, R.mipmap.my_normal};
+    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.discovery_normal, R.mipmap.message_normal, R.mipmap.my_normal};
     /**
      * 底部导航栏的文字正常显示
      */
@@ -51,7 +56,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片选中显示
      */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,  R.mipmap.discovery_select_blue, R.mipmap.my_select_blue};
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,  R.mipmap.discovery_select_blue, R.mipmap.message_select_blue, R.mipmap.my_select_blue};
     /**
      * TAB项的文字是否显示
      */
