@@ -11,11 +11,10 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!--<LinearLayout
-        android:id="@+id/fragment_container"
+   <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />-->
+        android:layout_height="1dp"
+        android:background="@color/fragment_background"/>
 
 
     <LinearLayout
