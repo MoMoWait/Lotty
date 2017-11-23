@@ -5,6 +5,7 @@
     <string name="message">视频</string>
     <string name="discovery">走势</string>
     <string name="my">我的</string>
+    <string name="toolkit">工具</string>
     <string name="rights">\@2015-2017 All Rights Reserved</string>
     <string name="input_user_name">输入帐号</string>
     <string name="input_password">输入密码</string>
@@ -67,4 +68,10 @@
     <string name="suggestion_succ">反馈成功</string>
     <string name="suggestion_failed">反馈失败</string>
     <string name="current_color">当前彩种:</string>
+    <string name="phone_area">号码归属</string>
+    <string name="area_code_search">区号查询</string>
+    <string name="train_search">火车查询</string>
+    <string name="weather_search">天气预报</string>
+    <string name="exchange_search">汇率查询</string>
+
 </resources>

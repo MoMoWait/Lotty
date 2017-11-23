@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/white"
-        android:text="@string/user_login"
         android:layout_centerInParent="true" />
     <TextView
         android:id="@+id/text_right"

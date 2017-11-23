@@ -15,22 +15,35 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp"
             android:text="@string/current_color"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical" />
         <Spinner
             android:id="@+id/spinner_color"
             android:layout_width="match_parent"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list_lottery"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="20dp"
-        android:paddingTop="20dp"
-        android:divider="@android:color/transparent"
-        android:textSize="18sp"/>
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_load"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true" />
+
+        <ListView
+            android:id="@+id/list_lottery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="20dp"
+            android:paddingTop="20dp"
+            android:divider="@android:color/transparent"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+
 </LinearLayout>
