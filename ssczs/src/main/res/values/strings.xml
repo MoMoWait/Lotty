@@ -73,5 +73,25 @@
     <string name="train_search">火车查询</string>
     <string name="weather_search">天气预报</string>
     <string name="exchange_search">汇率查询</string>
-
+    <string name="input_phone_code">输入手机号码</string>
+    <string name="one_key_search">一键查询</string>
+    <string name="enter_phone_code_tip">请输入手机号</string>
+    <string name="phone_code_error">手机号不正确</string>
+    <string name="enter_code">输入区号</string>
+    <string name="enter_city">输入地址</string>
+    <string name="enter_code_tip">请输入区号</string>
+    <string name="enter_city_tip">请输入城市</string>
+    <string name="unknow_area">未知地区</string>
+    <string name="unknow_code">未知区号</string>
+    <string name="enter_city_name">输入城市</string>
+    <string name="unknow_weather">天气未知</string>
+    <string name="before_change">转换前:</string>
+    <string name="later_change">转换后:</string>
+    <string name="input_before_amount">输入转换前的数量</string>
+    <string name="one_key_change">一键转换</string>
+    <string name="enter_amount_tip">请输入数量</string>
+    <string name="exchange_error">转换失败</string>
+    <string name="enter_train">输入车次</string>
+    <string name="enter_train_tip">请输入车次</string>
+    <string name="trainno_error">未知车次</string>
 </resources>
