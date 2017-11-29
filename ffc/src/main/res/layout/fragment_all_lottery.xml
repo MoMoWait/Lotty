@@ -1,50 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/fragment_background">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout_current_color"
+    <ProgressBar
+        android:id="@+id/progress_load"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true" />
+
+    <ListView
+        android:id="@+id/list_lottery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="18sp"
-            android:text="@string/current_color"
-            android:gravity="center_vertical" />
-        <Spinner
-            android:id="@+id/spinner_color"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
-    </LinearLayout>
+        android:divider="@android:color/transparent"
+        android:dividerHeight="20dp"
+        android:paddingTop="20dp"
+        android:textSize="18sp" />
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ProgressBar
-            android:id="@+id/progress_load"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true" />
-
-        <ListView
-            android:id="@+id/list_lottery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerHeight="20dp"
-            android:paddingTop="20dp"
-            android:divider="@android:color/transparent"
-            android:textSize="18sp"/>
-    </RelativeLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

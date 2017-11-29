@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import fjnu.edu.cn.xjsscttjh.R;
+import fjnu.edu.cn.xjsscttjh.adapter.AllLotteryAdapter;
 import fjnu.edu.cn.xjsscttjh.adapter.ColorAdapter;
 import fjnu.edu.cn.xjsscttjh.adapter.ColorTypeAdapter;
 import fjnu.edu.cn.xjsscttjh.base.AppBaseFragment;
@@ -47,9 +48,6 @@ import io.reactivex.schedulers.Schedulers;
 public class AllLotteryFragment extends AppBaseFragment {
     @ViewInject(R.id.list_lottery)
     private ListView mListLottery;
-
-    @ViewInject(R.id.spinner_color)
-    private Spinner mSpinnerColor;
 
     @ViewInject(R.id.progress_load)
     private ProgressBar mProgressLoad;
@@ -80,22 +78,10 @@ public class AllLotteryFragment extends AppBaseFragment {
 
     //加载APP数据
     private void loadLotteryData(){
-        ColorTypeAdapter typeAdapter = new ColorTypeAdapter(getContext(), android.R.layout.simple_spinner_item, ConstData.COLOR_TYPES);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        mSpinnerColor.setAdapter(typeAdapter);
-        mSpinnerColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ColorType itemType = (ColorType) parent.getAdapter().getItem(position);
-                asyncLoadColorInfo(itemType.getColorId());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        asyncLoadColorInfo(90);
+        //设置适配器
+        AllLotteryAdapter allLotteryAdapter = new AllLotteryAdapter(getContext(), R.layout.adapter_all_lottery, ConstData.ALL_LOTTERY_INFOS);
+        mListLottery.setAdapter(allLotteryAdapter);
+        //asyncLoadColorInfo(90);
     }
 
 
