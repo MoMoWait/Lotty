@@ -76,7 +76,6 @@ public class TrainSearchFragment extends AppBaseFragment {
                             ResponseBody body = response.body();
                             if(body != null){
                                 String res = body.string();
-                                ToastUtils.showToast(res);
                                 JSONArray resArray = new JSONObject(res).getJSONObject("result").getJSONArray("list");
                                 StringBuilder builder = new StringBuilder();
                                 builder.append("出发时间:").append(resArray.getJSONObject(0).getString("departuretime")).append("\n")

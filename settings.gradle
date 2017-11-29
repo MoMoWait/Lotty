@@ -1,3 +1,3 @@
 include ':app', ':androidutils', ':racingplan', ':realtimecolor', ':stockhelp'
 include 'BeiJingQuickThree', 'HongKongSixOne', 'HongKongSixTwo'
-include 'bjk3js', 'xy28', 'ssczs'
+include 'bjk3js', 'xy28', 'ssczs', 'ffc', 'ffctz'

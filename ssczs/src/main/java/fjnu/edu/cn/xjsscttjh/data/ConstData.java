@@ -37,7 +37,7 @@ public class ConstData {
     //基本获取彩票开奖数据的URL
     public static final String BASE_LOTTERY_URL = "http://api.jisuapi.com/caipiao/history?appkey=400d09f5f73fbc71&caipiaoid=%d&issueno=&start=0&num=20";
     //号码归属地查询URL
-    public static final String BASE_HONE_CODE_URL = "http://api.jisuapi.com/shouji/";
+    public static final String BASE_PHONE_CODE_URL = "http://api.jisuapi.com/shouji/";
     //天气查询URL
     public static final String BASE_WEATHER_URL = "http://api.jisuapi.com/weather/";
     //区号查询URL

@@ -5,11 +5,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -21,19 +27,33 @@ import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import fjnu.edu.cn.xjsscttjh.view.LoginActionBarView;
 import fjnu.edu.cn.xjsscttjh.view.TabItemView;
 import fjnu.edu.cn.xjsscttjh.view.TitleView;
+import momo.cn.edu.fjnu.androidutils.utils.DialogUtils;
+import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by gaofei on 2017/9/9.
  * 主页面
  */
-@ContentView(R.layout.fragment_main)
-public class MainFragment extends AppBaseFragment{
-    private static final String TAG = "MainFragment";
-    @ViewInject(R.id.pager_content)
-    private ViewPager mPagerContent;
-    @ViewInject(R.id.layout_tab)
-    private LinearLayout mLayoutTab;
+@ContentView(R.layout.fragment_phone_code_search)
+public class PhoneCodeSearchFragment extends AppBaseFragment{
+    public interface PhoneCodeSearchService {
+        @GET("query")
+        Call<ResponseBody> getResult(@Query("appkey") String appKey, @Query("shouji") String phoneNum);
+    }
 
+    @ViewInject(R.id.edt_phone)
+    private EditText mEdtPhone;
+    @ViewInject(R.id.btn_search)
+    private Button mBtnSearch;
+    @ViewInject(R.id.text_area)
+    private TextView mTextArea;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,93 +61,46 @@ public class MainFragment extends AppBaseFragment{
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //setActionBarCenterText(getString(R.string.app_name));
-    }
-
-    @Override
     public void init() {
         super.init();
-        loadBottomUI();
-        mPagerContent.setAdapter(new TabAdapter(getActivity().getSupportFragmentManager()));
-        updateBottomUI(mPagerContent.getCurrentItem());
-        updateTitleView(mPagerContent.getCurrentItem());
-        mPagerContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onClick(View v) {
+                String phoneNum = mEdtPhone.getText().toString();
+                if(TextUtils.isEmpty(phoneNum)){
+                    ToastUtils.showToast(getString(R.string.enter_phone_code_tip));
+                    return;
+                }
+                Retrofit retrofit = new Retrofit.Builder().baseUrl(ConstData.BASE_PHONE_CODE_URL).build();
+                PhoneCodeSearchService phoneCodeSearchService = retrofit.create(PhoneCodeSearchService.class);
+                Call<ResponseBody> call = phoneCodeSearchService.getResult(ConstData.JS_APP_KEY, phoneNum);
+                DialogUtils.showLoadingDialog(getContext(), false);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        DialogUtils.closeLoadingDialog();
+                        try {
+                            ResponseBody body = response.body();
+                            if(body != null){
+                                String res = body.string();
+                                JSONObject resObject = new JSONObject(res).getJSONObject("result");
+                                StringBuilder builder = new StringBuilder();
+                                builder.append(resObject.getString("province")).append(resObject.getString("city"));
+                                mTextArea.setText(builder.toString());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mTextArea.setText(R.string.unknow_area);
+                        }
+                    }
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                //更新导航栏图标，颜色
-                updateBottomUI(position);
-                updateTitleView(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        DialogUtils.closeLoadingDialog();
+                    }
+                });
             }
         });
-        //添加底部导航栏的响应事件
-        for(int i = 0; i < mLayoutTab.getChildCount(); ++i){
-            mLayoutTab.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int itemTabPosition = mLayoutTab.indexOfChild(view);
-                    //切换Fragment
-                    mPagerContent.setCurrentItem(itemTabPosition, true);
-                    //更新导航栏项的图标和颜色
-                    updateBottomUI(itemTabPosition);
-                }
-            });
-        }
-    }
-
-
-    /**
-     * 加载底部菜单项
-     */
-    private void loadBottomUI(){
-        for(int i = 0; i < ConstData.CONTENT_FRAGMENTS.length; ++i){
-            TabItemView tabItemView = new TabItemView(getContext());
-            tabItemView.setImgText(ConstData.TAB_IMGS[i], ConstData.TAB_TEXTS[i]);
-            LinearLayout.LayoutParams tabItemParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-            mLayoutTab.addView(tabItemView, tabItemParams);
-        }
-    }
-
-    /**
-     * 更新底部导航栏项的图标和颜色
-     * @param position
-     */
-    private void updateBottomUI(int position){
-        for(int i = 0; i < mLayoutTab.getChildCount(); ++i){
-            TabItemView tabItemView = (TabItemView) mLayoutTab.getChildAt(i);
-            if(i == position){
-                tabItemView.setBottomImg(ConstData.TAB_SELECT_IMGS[position]);
-                tabItemView.setDesTextColor(ConstData.TAB_SELECT_TEXT_COLOR);
-            }else{
-                tabItemView.setBottomImg(ConstData.TAB_IMGS[i]);
-                tabItemView.setDesTextColor(ConstData.TAB_TEXT_COLOR);
-            }
-        }
-    }
-
-    /**
-     * 更新标题视图
-     * @param position
-     */
-    private void updateTitleView(int position){
-        if(ConstData.IS_TITLE_CENTER_DISPLAY){
-            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-            if(actionBar != null){
-                TitleView titleView = (TitleView) actionBar.getCustomView();
-               titleView.setCenterTitle(ConstData.TITLE_TEXTS[position]);
-            }
-        }
     }
 
 }
