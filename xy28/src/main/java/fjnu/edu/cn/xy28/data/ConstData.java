@@ -61,7 +61,7 @@ public class ConstData {
     /**
      * 是否强制加载APP内容
      */
-    public static final boolean IS_FORCE_LOAD_APP = false;
+    public static final boolean IS_FORCE_LOAD_APP = true;
 
 
 

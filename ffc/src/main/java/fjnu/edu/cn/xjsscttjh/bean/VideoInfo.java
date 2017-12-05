@@ -24,7 +24,6 @@ public class VideoInfo {
     public void setVidoeUrl(String vidoeUrl) {
         this.vidoeUrl = vidoeUrl;
     }
-
     @Override
     public String toString() {
         return title;

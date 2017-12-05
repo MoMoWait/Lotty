@@ -3,11 +3,13 @@ package fjnu.edu.cn.xjsscttjh.data;
 import android.support.v4.content.ContextCompat;
 
 import fjnu.edu.cn.xjsscttjh.R;
+import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ColorType;
 import fjnu.edu.cn.xjsscttjh.bean.LotteryInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ToolInfo;
 import fjnu.edu.cn.xjsscttjh.fragment.AllLotteryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.AreaCodeSearchFragment;
+import fjnu.edu.cn.xjsscttjh.fragment.ColorInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.DiscoveryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ExchangeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
@@ -64,11 +66,11 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class, DiscoveryFragment.class, MessageFragment.class, ToolkitFragment.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class, ColorInfoFragment.class, ToolkitFragment.class, MyFragment.class};
     /**
      * 底部导航项的文字显示
      */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.message), CommonValues.application.getString(R.string.toolkit), CommonValues.application.getString(R.string.my)};
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home),  CommonValues.application.getString(R.string.color_info), CommonValues.application.getString(R.string.toolkit), CommonValues.application.getString(R.string.my)};
     /**
      * 标题文字，可自定义
      */
@@ -85,8 +87,8 @@ public class ConstData {
             new LotteryInfo(R.mipmap.logo_ahk3, 76, "安徽快3"),
             new LotteryInfo(R.mipmap.logo_dlt, 14, "大乐特"),
             new LotteryInfo(R.mipmap.logo_hljd11, 76, "山东11选5"),
-            new LotteryInfo(R.mipmap.logo_jczq, 21, "竞彩足球"),
-            new LotteryInfo(R.mipmap.logo_jclq, 22, "竞彩蓝球"),
+            new LotteryInfo(R.mipmap.logo_jczq, 73, "竞彩足球"),
+            new LotteryInfo(R.mipmap.logo_jclq, 93, "竞彩蓝球"),
             new LotteryInfo(R.mipmap.logo_qlc, 13, "七乐彩"),
             new LotteryInfo(R.mipmap.logo_ssq, 11, "双色球"),
     };
@@ -94,7 +96,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片正常显示
      */
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.discovery_normal, R.mipmap.message_normal, R.mipmap.category_normal, R.mipmap.my_normal};
+    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.message_normal, R.mipmap.category_normal,  R.mipmap.my_normal};
     /**
      * 底部导航栏的文字正常显示
      */
@@ -106,7 +108,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片选中显示
      */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,  R.mipmap.discovery_select_blue, R.mipmap.message_select_blue, R.mipmap.category_select_blue, R.mipmap.my_select_blue};
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,   R.mipmap.message_select_blue,  R.mipmap.category_select_blue, R.mipmap.my_select_blue};
     /**
      * TAB项的文字是否显示
      */
@@ -141,6 +143,8 @@ public class ConstData {
         String USER_NAME = "user_name";
         String TARGET_FRAGMENT = "target_fragment";
         String TARGET_ACTIVITY_LABEL = "target_activity_label";
+        String LOTTERY_ID = "lottery_id";
+        String LOTTERY_NAME = "lottery_name";
     }
 
     public interface SharedKey{

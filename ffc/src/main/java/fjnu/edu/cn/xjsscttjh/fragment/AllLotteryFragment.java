@@ -1,5 +1,6 @@
 package fjnu.edu.cn.xjsscttjh.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -26,12 +27,14 @@ import java.util.List;
 import java.util.Locale;
 
 import fjnu.edu.cn.xjsscttjh.R;
+import fjnu.edu.cn.xjsscttjh.activity.LotteryDisplayActivity;
 import fjnu.edu.cn.xjsscttjh.adapter.AllLotteryAdapter;
 import fjnu.edu.cn.xjsscttjh.adapter.ColorAdapter;
 import fjnu.edu.cn.xjsscttjh.adapter.ColorTypeAdapter;
 import fjnu.edu.cn.xjsscttjh.base.AppBaseFragment;
 import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ColorType;
+import fjnu.edu.cn.xjsscttjh.bean.LotteryInfo;
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -81,6 +84,19 @@ public class AllLotteryFragment extends AppBaseFragment {
         //设置适配器
         AllLotteryAdapter allLotteryAdapter = new AllLotteryAdapter(getContext(), R.layout.adapter_all_lottery, ConstData.ALL_LOTTERY_INFOS);
         mListLottery.setAdapter(allLotteryAdapter);
+
+        mListLottery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                LotteryInfo lotteryInfo = (LotteryInfo) adapterView.getAdapter().getItem(i);
+                Intent intent = new Intent(getContext(), LotteryDisplayActivity.class);
+                intent.putExtra(ConstData.IntentKey.LOTTERY_ID, lotteryInfo.getColorId());
+                intent.putExtra(ConstData.IntentKey.LOTTERY_NAME, lotteryInfo.getDes());
+                intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, lotteryInfo.getDes());
+                startActivity(intent);
+            }
+        });
+
         //asyncLoadColorInfo(90);
     }
 

@@ -83,6 +83,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.LotteryDisplayActivity"
+            android:screenOrientation="portrait"
+            android:label="">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@ public class SizeUtils {
      * @param spValue
      * @return
      */
-    public float sp2px(float spValue){
+    public static float sp2px(float spValue){
         return DeviceInfoUtils.getScaleDenstity(CommonValues.application) * spValue;
     }
 
@@ -37,8 +37,12 @@ public class SizeUtils {
      * 将像素转化成dp
      * @return
      */
-    public float px2dp(int pxValue){
+    public static float px2dp(int pxValue){
         return pxValue / DeviceInfoUtils.getDenstity(CommonValues.application);
+    }
+
+    public static float px2sp(int pxValue){
+        return pxValue / DeviceInfoUtils.getScaleDenstity(CommonValues.application);
     }
 
 }
