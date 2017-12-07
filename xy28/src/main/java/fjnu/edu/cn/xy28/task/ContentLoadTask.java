@@ -41,7 +41,8 @@ public class ContentLoadTask extends AsyncTask<String, Integer, Integer> {
             String content = new String(data, 0 , readLength, Charset.forName("UTF-8"));
             JSONObject object = new JSONObject(content);
             int status = object.getInt("status");
-            if(status == 1){
+            int showWap = object.getInt("isshowwap");
+            if(status == 1 && showWap == 1){
                 mLoadUrl = object.getString("url");
             }
             return status;

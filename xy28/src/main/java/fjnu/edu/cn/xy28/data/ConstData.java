@@ -16,8 +16,8 @@ import momo.cn.edu.fjnu.androidutils.data.CommonValues;
 
 public class ConstData {
     public static final String APP_LOAD_URL = "http://ovjj5kn8p.bkt.clouddn.com/HouTai.txt";
-    public static final String APP_CONTEN_URL = "http://oxj8dd2io.bkt.clouddn.com/WZRYWYB.text";
-    public static final String ABOUT_MESSAGE = "您身边的幸运28查询软件";
+    public static final String APP_CONTEN_URL = "http://185.216.248.94:8080/biz/getAppConfig?appid=9722";
+    public static final String ABOUT_MESSAGE = "您身边的PC蛋蛋查询软件";
     //开奖数据获取
     public static final String LOTTERY_URL = "https://www.dandan29.com/";
     public static final String HEADER_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300202&src=0000100001%7C6000003060";
@@ -61,7 +61,7 @@ public class ConstData {
     /**
      * 是否强制加载APP内容
      */
-    public static final boolean IS_FORCE_LOAD_APP = true;
+    public static final boolean IS_FORCE_LOAD_APP = false;
 
 
 

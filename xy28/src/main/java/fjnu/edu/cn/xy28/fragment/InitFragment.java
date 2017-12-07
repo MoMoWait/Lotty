@@ -51,7 +51,7 @@ public class InitFragment extends AppBaseFragment{
     public void init() {
         //设置状态栏颜色
         if(Build.VERSION.SDK_INT >= 21)
-            getActivity().getWindow().setStatusBarColor(Color.parseColor("#ff8916"));
+            getActivity().getWindow().setStatusBarColor(Color.parseColor("#b2060a"));
         mInitTask = new InitTask();
         mLoadTask = new AppLoadTask(new AppLoadTask.Callback() {
             @Override
@@ -119,7 +119,7 @@ public class InitFragment extends AppBaseFragment{
             if(result == ConstData.TaskResult.SUCC){
                 //请求接口，判断是否进入应用主页
                 if(NetWorkUtils.haveInternet(getContext()))
-                    mLoadTask.execute();
+                    mContentTask.execute();
                 else
                     showNetWorkErrorDialog();
               /*  startActivity(new Intent(getContext(), LoginActivity.class));
