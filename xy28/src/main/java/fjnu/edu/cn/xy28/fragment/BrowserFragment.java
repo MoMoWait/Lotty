@@ -57,7 +57,7 @@ public class BrowserFragment extends BaseFragment {
         webSettings.setSupportZoom(true);
         webSettings.setUseWideViewPort(true);
         //webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+        //webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
         //加载需要显示的网页
         //mWebInfo.loadUrl(mLoadUrl);
         //设置Web视图

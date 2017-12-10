@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "fjnu.edu.cn.pcdd"
+        applicationId "fjnu.edu.cn.pcddcsb"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
