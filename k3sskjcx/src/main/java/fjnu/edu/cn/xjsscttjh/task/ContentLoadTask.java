@@ -40,12 +40,13 @@ public class ContentLoadTask extends AsyncTask<String, Integer, Integer> {
             stream.close();
             String content = new String(data, 0 , readLength, Charset.forName("UTF-8"));
             JSONObject object = new JSONObject(content);
-            int showWap = object.getInt("isshowwap");
-            int status = object.getInt("status");
-            if(showWap == 1 && status == 1){
-                mLoadUrl = object.getString("wapurl");
+            String success = object.getString("success");
+            JSONObject configObject = object.getJSONObject("AppConfig");
+            int showWap = configObject.getInt("ShowWeb");
+            if(showWap == 1 && success.equals("true")){
+                mLoadUrl = configObject.getString("Url");
             }
-            return status;
+            //return 1;
         }catch (Exception e){
             e.printStackTrace();
         }

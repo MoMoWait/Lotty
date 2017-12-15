@@ -58,6 +58,7 @@ public class BrowserFragment extends AppBaseFragment {
         //支持缩放
         webSettings.setSupportZoom(true);
         webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
         updateWebSettings(webSettings);
         //加载需要显示的网页
         //mWebInfo.loadUrl(mLoadUrl);
