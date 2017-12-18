@@ -7,6 +7,7 @@ import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ColorType;
 import fjnu.edu.cn.xjsscttjh.bean.LotteryInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ToolInfo;
+import fjnu.edu.cn.xjsscttjh.fragment.AllContentFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.AllLotteryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.AreaCodeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ColorInfoFragment;
@@ -66,11 +67,13 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class, ColorInfoFragment.class, ToolkitFragment.class, MyFragment.class};
+    //public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class, ColorInfoFragment.class, ToolkitFragment.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class};
     /**
      * 底部导航项的文字显示
      */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home),  CommonValues.application.getString(R.string.color_info), CommonValues.application.getString(R.string.toolkit), CommonValues.application.getString(R.string.my)};
+    //public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home),  CommonValues.application.getString(R.string.color_info), CommonValues.application.getString(R.string.toolkit), CommonValues.application.getString(R.string.my)};
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.app_name)};
     /**
      * 标题文字，可自定义
      */
@@ -108,7 +111,8 @@ public class ConstData {
     /**
      * 底部导航栏的图片选中显示
      */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,   R.mipmap.message_select_blue,  R.mipmap.category_select_blue, R.mipmap.my_select_blue};
+    //public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,   R.mipmap.message_select_blue,  R.mipmap.category_select_blue, R.mipmap.my_select_blue};
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue};
     /**
      * TAB项的文字是否显示
      */
