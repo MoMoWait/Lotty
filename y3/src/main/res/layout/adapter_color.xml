@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="@string/chart_trend"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/text_issueno"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:text="@string/regular_analysis"
+        android:textColor="@color/black"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/text_number"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/my_info"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"/>
+</LinearLayout>

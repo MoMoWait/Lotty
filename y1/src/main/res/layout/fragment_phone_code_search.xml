@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edt_phone"
+        style="@style/common_edit"
+        android:layout_width="match_parent"
+        android:hint="@string/input_phone_code"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/btn_search"
+        style="@style/common_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/one_key_search" />
+
+    <TextView
+        android:id="@+id/text_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/red"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
