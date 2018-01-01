@@ -62,11 +62,17 @@ public class LotteryDisplayAdapter extends ArrayAdapter<ColorInfo> {
             String[] numbers = itemColorInfo.getNumber().split("\\s+");
             for(String itemNumber: numbers){
                 TextView luckyNumberView = new TextView(mContext);
-                luckyNumberView.setBackgroundResource(R.drawable.luck_number_back_red);
+                if(position == 0) {
+                    luckyNumberView.setBackgroundResource(R.drawable.luck_number_back_red);
+                    luckyNumberView.setTextColor(mContext.getResources().getColor(R.color.white));
+                }else{
+                    luckyNumberView.setBackgroundResource(R.drawable.luck_number_back_red_ring);
+                    luckyNumberView.setTextColor(mContext.getResources().getColor(R.color.black));
+                }
                 luckyNumberView.setGravity(Gravity.CENTER);
                 luckyNumberView.setText(itemNumber);
                 luckyNumberView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-                luckyNumberView.setTextColor(mContext.getResources().getColor(R.color.white));
+
                 layoutLuckyNumber.addView(luckyNumberView);
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)luckyNumberView.getLayoutParams();
                 params.leftMargin = SizeUtils.dp2px(10);

@@ -66,11 +66,11 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{AllLotteryFragment.class, ColorInfoFragment.class, ToolkitFragment.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, AllLotteryFragment.class,  MyFragment.class};
     /**
      * 底部导航项的文字显示
      */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home),  CommonValues.application.getString(R.string.color_info), CommonValues.application.getString(R.string.toolkit), CommonValues.application.getString(R.string.my)};
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.realtime_color),  CommonValues.application.getString(R.string.other),  CommonValues.application.getString(R.string.my)};
     /**
      * 标题文字，可自定义
      */
@@ -96,7 +96,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片正常显示
      */
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.message_normal, R.mipmap.category_normal,  R.mipmap.my_normal};
+    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.category_normal,  R.mipmap.my_normal};
     /**
      * 底部导航栏的文字正常显示
      */
@@ -104,11 +104,11 @@ public class ConstData {
     /**
      * 底部导航栏的文字选中显示
      */
-    public static final int TAB_SELECT_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_select_text_blue);
+    public static final int TAB_SELECT_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_select_text_green);
     /**
      * 底部导航栏的图片选中显示
      */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_blue,   R.mipmap.message_select_blue,  R.mipmap.category_select_blue, R.mipmap.my_select_blue};
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_green,   R.mipmap.category_select_green, R.mipmap.my_select_green};
     /**
      * TAB项的文字是否显示
      */
