@@ -7,8 +7,8 @@ android {
         applicationId "fjnu.edu.cn.y1"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 3
-        versionName "1.10"
+        versionCode 4
+        versionName "1.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //选择要添加的对应cpu类型的.so库。
