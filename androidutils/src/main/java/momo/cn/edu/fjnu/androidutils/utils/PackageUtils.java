@@ -43,4 +43,20 @@ public class PackageUtils {
 	public static String getPackageName(){
 		return CommonValues.application.getPackageName();
 	}
+
+	/**
+	 * 判断某个包名的APK是否安装
+	 * @param pkgName
+	 * @return
+	 */
+	public static boolean isInstalled(Context context, String pkgName){
+		PackageManager pm = context.getPackageManager();
+		try {
+			 pm.getPackageInfo(pkgName, 0);
+			 return true;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

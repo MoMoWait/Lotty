@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 输入框通用的样式-->
+    <style name="common_edit">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_common</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/h_common</item>
+        <item name="android:background">@drawable/common_edit_background</item>
+        <item name="android:padding">@dimen/pm_little</item>
+        <item name="android:layout_margin">@dimen/pm_large</item>
+    </style>
+
+
+    <!-- Button通用的样式-->
+    <style name="common_btn">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_common</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/h_common</item>
+        <item name="android:background">@drawable/common_btn_background</item>
+        <item name="android:padding">@dimen/pm_little</item>
+        <item name="android:layout_margin">@dimen/pm_large</item>
+    </style>
+
+    <!-- TextView通用样式-->
+    <style name="common_text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_little</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/h_common</item>
+        ]       <item name="android:padding">@dimen/pm_little</item>
+        <item name="android:layout_margin">@dimen/pm_large</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="RadioButton" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@null</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="EditText" parent="@android:style/Widget.EditText">
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">top</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:ems">18</item>
+    </style>
+</resources>
