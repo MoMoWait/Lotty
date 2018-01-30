@@ -8,10 +8,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import fjnu.edu.cn.xjsscttjh.bean.ForecastInfo;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
 
 /**
@@ -79,5 +81,43 @@ public class LottyDataGetUtils {
             Log.i(TAG, "getAllTrendInfoByFC->exception:" + e);
         }
         return  trendInfoList;
+    }
+
+    /**
+     * 从发彩网抓取预测消息
+     * @return
+     */
+    public static Map<String, List<ForecastInfo>> getAllForecastInfoByFC(){
+        Map<String, List<ForecastInfo>> forecastMap = new HashMap<>();
+        try{
+            Document document = Jsoup.connect("http://www.es123.com/").get();
+            Elements forcaestElements = document.getElementsByClass("fuli_xinwen");
+            for(Element itemElement : forcaestElements){
+                Elements titleElements = itemElement.getAllElements().get(0).getAllElements().get(1).getAllElements();
+                Elements currAllElements = itemElement.getAllElements();
+                int index = 1;
+                for(Element itemTitleElement : titleElements){
+                    String lottyTitle = itemTitleElement.text();
+                    List<ForecastInfo> itemForecastInfos = new ArrayList<>();
+                    Elements liElements = currAllElements.get(index++).getAllElements().get(1).getAllElements();
+                    for(Element itemLiElement : liElements){
+                        ForecastInfo forecastInfo = new ForecastInfo();
+                        String url = itemLiElement.getElementsByTag("a").get(0).attr("href");
+                        String time = itemLiElement.getElementsByTag("time").get(0).text();
+                        String title = itemLiElement.getElementsByTag("a").get(0).text();
+                        forecastInfo.setTime(time);
+                        forecastInfo.setTitle(title);
+                        forecastInfo.setUrl(url);
+                        itemForecastInfos.add(forecastInfo);
+                    }
+                    forecastMap.put(lottyTitle, itemForecastInfos);
+                }
+            }
+
+        }catch (Exception e){
+            //no handle
+            Log.i(TAG, "getAllTrendInfoByFC->exception:" + e);
+        }
+        return forecastMap;
     }
 }

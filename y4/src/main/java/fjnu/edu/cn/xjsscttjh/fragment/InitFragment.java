@@ -23,11 +23,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import fjnu.edu.cn.xjsscttjh.R;
 import fjnu.edu.cn.xjsscttjh.activity.MainActivity;
 import fjnu.edu.cn.xjsscttjh.base.AppBaseFragment;
+import fjnu.edu.cn.xjsscttjh.bean.ForecastInfo;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import fjnu.edu.cn.xjsscttjh.task.AppLoadTask;
@@ -173,6 +175,8 @@ public class InitFragment extends AppBaseFragment{
                 //测试抓取网页数据接口
                 List<TrendInfo> trendInfoList = LottyDataGetUtils.getAllTrendInfoByFC();
                 Log.i(TAG, "trendInfoList:" + trendInfoList);
+                Map<String, List<ForecastInfo>> forecastMap = LottyDataGetUtils.getAllForecastInfoByFC();
+                Log.i(TAG, "forecastMap:" + forecastMap);
                 TimeUnit.MILLISECONDS.sleep(ConstData.INIT_TIME);
                 return ConstData.TaskResult.SUCC;
             } catch (Exception e) {
