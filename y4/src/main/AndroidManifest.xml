@@ -103,19 +103,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="org.cocos2dx.lua.AppActivity"
-            android:label="@string/app_name"
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.FcTrendsInfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation">
+            android:label="@string/trend_chart">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
-
-        <activity android:name="com.mastersdk.android.MainActivity"
-            android:label="@string/app_name"
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.FcTrendChartActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:configChanges="orientation">
+            android:label="">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

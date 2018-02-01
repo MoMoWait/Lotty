@@ -2,7 +2,6 @@ package fjnu.edu.cn.xjsscttjh.base;
 
 import android.text.TextUtils;
 
-import com.mastersdk.android.NewMasterSDK;
 
 import org.xutils.x;
 
@@ -10,7 +9,6 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fjnu.edu.cn.xjsscttjh.activity.MainActivity;
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import momo.cn.edu.fjnu.androidutils.base.BaseApplication;
 import momo.cn.edu.fjnu.androidutils.utils.StorageUtils;

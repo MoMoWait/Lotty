@@ -46,9 +46,5 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     compile files('libs/mysql-connector-java-5.0.8-bin.jar')
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation files('libs/android-async-http-1.4.8.jar')
-    implementation files('libs/android-mastersdk-1.1.jar')
-    implementation files('libs/bugly_agent.jar')
-    implementation files('libs/bugly_crash_release.jar')
     compile 'org.jsoup:jsoup:1.10.3'
 }

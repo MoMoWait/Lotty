@@ -77,6 +77,7 @@ public class LottyDataGetUtils {
             }
 
         }catch (Exception e){
+            e.printStackTrace();
             //no handle
             Log.i(TAG, "getAllTrendInfoByFC->exception:" + e);
         }
@@ -88,21 +89,26 @@ public class LottyDataGetUtils {
      * @return
      */
     public static Map<String, List<ForecastInfo>> getAllForecastInfoByFC(){
-        Map<String, List<ForecastInfo>> forecastMap = new HashMap<>();
+        Map<String, List<ForecastInfo>> forecastMap = new LinkedHashMap<>();
         try{
             Document document = Jsoup.connect("http://www.es123.com/").get();
             Elements forcaestElements = document.getElementsByClass("fuli_xinwen");
             for(Element itemElement : forcaestElements){
-                Elements titleElements = itemElement.getAllElements().get(0).getAllElements().get(1).getAllElements();
-                Elements currAllElements = itemElement.getAllElements();
-                int index = 1;
-                for(Element itemTitleElement : titleElements){
+                Elements titleElements = itemElement.children().get(0).children().get(1).children();
+                //Log.i(TAG, "child0->html:" + itemElement.children().get(0).html());
+                Elements currAllElements = itemElement.children();
+                //int index = 1;
+                for(int i = 0; i < titleElements.size(); ++i){
+                    Element itemTitleElement = titleElements.get(i);
                     String lottyTitle = itemTitleElement.text();
+                    Log.i(TAG, "getAllForecastInfoByFC->lottyTitle:" + lottyTitle);
                     List<ForecastInfo> itemForecastInfos = new ArrayList<>();
-                    Elements liElements = currAllElements.get(index++).getAllElements().get(1).getAllElements();
+                    Elements liElements = currAllElements.get(i + 1).children().get(1).children();
                     for(Element itemLiElement : liElements){
+                        //Log.i(TAG, "itemLiElement->html:" + itemLiElement.html());
                         ForecastInfo forecastInfo = new ForecastInfo();
                         String url = itemLiElement.getElementsByTag("a").get(0).attr("href");
+                        Log.i(TAG, "getAllForecastInfoByFC->url:" + url);
                         String time = itemLiElement.getElementsByTag("time").get(0).text();
                         String title = itemLiElement.getElementsByTag("a").get(0).text();
                         forecastInfo.setTime(time);
@@ -115,9 +121,31 @@ public class LottyDataGetUtils {
             }
 
         }catch (Exception e){
+            e.printStackTrace();
             //no handle
             Log.i(TAG, "getAllTrendInfoByFC->exception:" + e);
         }
         return forecastMap;
+    }
+
+    public static String getTrendChardHtmlByFc(String url){
+        try{
+            Document document = Jsoup.connect(url).get();
+            Elements allElements = document.body().children();
+            for(Element itemElement : allElements){
+                Log.i(TAG, "getTrendChardHtmlByFc->id:" + itemElement.id());
+                if(!"show".equals(itemElement.id())){
+                    itemElement.attr("style", "display: none");
+                }else{
+                    Elements liElements =  itemElement.children().get(0).children().get(0).getElementsByTag("tr");
+                    liElements.get(liElements.size() - 1).attr("style", "display: none");
+                }
+            }
+            return document.outerHtml();
+            //return document.outerHtml();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

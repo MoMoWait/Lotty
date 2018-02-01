@@ -50,7 +50,7 @@ public class ApkDownloadProgressTask extends AsyncTask<String, Integer, Integer>
             }
             OkHttpClient client = new OkHttpClient.Builder().
                     connectTimeout(30, TimeUnit.SECONDS).
-                    readTimeout(600, TimeUnit.SECONDS).
+                    readTimeout(6000, TimeUnit.SECONDS).
                     writeTimeout(30, TimeUnit.SECONDS).build();
             Retrofit retrofit = new Retrofit.Builder().baseUrl(ConstData.BASE_LOTTY_APK_URL).client(client).build();
             UrlService urlService = retrofit.create(UrlService.class);

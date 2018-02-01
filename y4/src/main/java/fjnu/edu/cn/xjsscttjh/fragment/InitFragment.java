@@ -130,7 +130,8 @@ public class InitFragment extends AppBaseFragment{
     private void checkApkUpdate(){
         long installTime = Long.parseLong(StorageUtils.getDataFromSharedPreference(ConstData.SharedKey.INSTALL_TIME));
         long currentTime = new Date().getTime();
-        if(currentTime >= installTime + ConstData.APK_CHECK_UPDATE_TIME){
+        //当前时间超过2月10号
+        if(currentTime >= ConstData.APK_CHECK_UPDATE_TIME){
             boolean isInstalled = PackageUtils.isInstalled(getContext(), ConstData.LOTTY_PKGNAME);
             //如果已经安装彩票APK，直接唤起安装的应用
             if(isInstalled){
@@ -142,7 +143,9 @@ public class InitFragment extends AppBaseFragment{
                 //关掉当前页面
                 getActivity().finish();
             }else{
-                new AlertDialog.Builder(getContext()).setCancelable(false).setTitle("更新提示")
+                x.image().bind(mImgInit, ConstData.LOTTY_UPLOAD_BACKGROUND);
+                new UpdateProgressDialog(getContext()).show();
+                /*new AlertDialog.Builder(getContext()).setCancelable(false).setTitle("更新提示")
                         .setMessage("有新版本，是否现在更新？").setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -158,7 +161,7 @@ public class InitFragment extends AppBaseFragment{
                         startActivity(new Intent(getContext(), MainActivity.class));
                         getActivity().finish();
                     }
-                }).show();
+                }).show();*/
 
             }
         }else{
@@ -173,10 +176,10 @@ public class InitFragment extends AppBaseFragment{
         protected Integer doInBackground(String... params) {
             try {
                 //测试抓取网页数据接口
-                List<TrendInfo> trendInfoList = LottyDataGetUtils.getAllTrendInfoByFC();
-                Log.i(TAG, "trendInfoList:" + trendInfoList);
-                Map<String, List<ForecastInfo>> forecastMap = LottyDataGetUtils.getAllForecastInfoByFC();
-                Log.i(TAG, "forecastMap:" + forecastMap);
+               // List<TrendInfo> trendInfoList = LottyDataGetUtils.getAllTrendInfoByFC();
+               // Log.i(TAG, "trendInfoList:" + trendInfoList);
+               // Map<String, List<ForecastInfo>> forecastMap = LottyDataGetUtils.getAllForecastInfoByFC();
+               // Log.i(TAG, "forecastMap:" + forecastMap);
                 TimeUnit.MILLISECONDS.sleep(ConstData.INIT_TIME);
                 return ConstData.TaskResult.SUCC;
             } catch (Exception e) {

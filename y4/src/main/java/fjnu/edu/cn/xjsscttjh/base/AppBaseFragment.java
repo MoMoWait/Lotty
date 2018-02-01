@@ -28,7 +28,10 @@ import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
 
 public abstract class AppBaseFragment extends BaseFragment {
     private static final String TAG = "AppBaseFragment";
-
+    /**
+     * 判断是否可以更新UI
+     */
+    private boolean canUpadteUI;
 
     /**
      * 设置中间文字
@@ -127,6 +130,17 @@ public abstract class AppBaseFragment extends BaseFragment {
     @Override
     public void init() {
         initActionBar();
+        canUpadteUI = true;
+    }
+
+    public boolean isCanUpadteUI() {
+        return canUpadteUI;
+    }
+
+    @Override
+    public void onDestroyView() {
+        canUpadteUI = false;
+        super.onDestroyView();
     }
 
     /**
