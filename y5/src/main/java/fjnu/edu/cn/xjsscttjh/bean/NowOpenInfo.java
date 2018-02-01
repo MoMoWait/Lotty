@@ -6,6 +6,7 @@ package fjnu.edu.cn.xjsscttjh.bean;
  */
 
 public class NowOpenInfo {
+    private String imgUrl;
     private String title;
     private String no;
     private String openDate;
@@ -17,6 +18,7 @@ public class NowOpenInfo {
     }
 
     public NowOpenInfo(String title, String no, String openDate, String number, String head, String tip) {
+
         this.title = title;
         this.no = no;
         this.openDate = openDate;
@@ -71,6 +73,14 @@ public class NowOpenInfo {
 
     public void setTip(String tip) {
         this.tip = tip;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     @Override

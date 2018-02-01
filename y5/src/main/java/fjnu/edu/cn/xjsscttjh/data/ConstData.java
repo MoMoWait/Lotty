@@ -20,6 +20,7 @@ import fjnu.edu.cn.xjsscttjh.fragment.FCTrendsTypeFramgnet;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MessageFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MyFragment;
+import fjnu.edu.cn.xjsscttjh.fragment.NowOpenFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.PhoneCodeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ToolkitFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.TrainSearchFragment;
@@ -86,7 +87,7 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{HomeFragment.class, AllLotteryFragment.class, FCTrendsTypeFramgnet.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{NowOpenFragment.class, AllLotteryFragment.class, FCTrendsTypeFramgnet.class, MyFragment.class};
     /**
      * 底部导航项的文字显示
      */

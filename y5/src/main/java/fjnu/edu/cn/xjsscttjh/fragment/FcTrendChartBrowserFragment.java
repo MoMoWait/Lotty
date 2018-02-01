@@ -68,6 +68,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
         webSettings.setSupportZoom(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setUserAgentString("Mozilla/5.0");
+        webSettings.setLoadWithOverviewMode(true);
         updateWebSettings(webSettings);
         //加载需要显示的网页
         //mWebInfo.loadUrl(mLoadUrl);

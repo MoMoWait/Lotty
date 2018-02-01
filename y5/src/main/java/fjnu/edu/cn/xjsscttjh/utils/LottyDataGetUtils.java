@@ -172,6 +172,7 @@ public class LottyDataGetUtils {
                     builder.append(" ").append(itemLiElement.text());
                 }
                 String number = builder.toString();
+                number = number.trim();
                 String head = itemTrElement.child(4).text();
                 String tip = itemTrElement.child(7).text();
                 NowOpenInfo info = new NowOpenInfo(title, no, openDate, number, head, tip);
@@ -180,6 +181,17 @@ public class LottyDataGetUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        List<TrendInfo> allTrendInfos = getAllTrendInfoByFC();
+        if(allTrendInfos != null && allTrendInfos.size() > 0){
+            for(NowOpenInfo info : infos){
+                for(TrendInfo trendInfo : allTrendInfos){
+                    if(info.getTitle().equals(trendInfo.getName())){
+                        info.setImgUrl(trendInfo.getImgUrl());
+                        break;
+                    }
+                }
+            }
         }
         return infos;
     }
