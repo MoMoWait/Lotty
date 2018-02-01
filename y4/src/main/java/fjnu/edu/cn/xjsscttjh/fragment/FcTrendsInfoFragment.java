@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
@@ -54,7 +55,8 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
     private ListView mListTrendInfos;
     private TextView mTextSelectTitle;
     private List<TrendInfo> mTrendInfos;
-
+    @ViewInject(R.id.progress_load)
+    ProgressBar mProgressLoad;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
         }
     }
 
-    private void update(TrendInfo info){
+    private void update(final TrendInfo info){
         //走势名称
         final List<String> trendNames = new ArrayList<>();
         //走势URL
@@ -101,7 +103,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), FcTrendChartActivity.class);
-                intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, trendNames.get(position));
+                intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, info.getName() + "-" + trendNames.get(position));
                 intent.putExtra(ConstData.IntentKey.WEB_LOAD_URL, trendUrls.get(position));
                 startActivity(intent);
             }
@@ -112,6 +114,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
     }
 
     private void loadData(){
+        mProgressLoad.setVisibility(View.VISIBLE);
         Observable.create(new ObservableOnSubscribe<List<TrendInfo>>() {
             @Override
             public void subscribe(ObservableEmitter<List<TrendInfo>> e) throws Exception {
@@ -121,14 +124,15 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<TrendInfo>>() {
             @Override
             public void accept(List<TrendInfo> trendInfos) throws Exception {
-                if(trendInfos == null || trendInfos.size() == 0){
+                mProgressLoad.setVisibility(View.GONE);
+                if (trendInfos == null || trendInfos.size() == 0) {
                     //检查网络
                     ToastUtils.showToast("请检查网络");
-                }else{
+                } else {
                     //获取当前选中Title
                     mTrendInfos = trendInfos;
                     String selectTitle = getActivity().getIntent().getStringExtra(ConstData.IntentKey.LOTTERY_NAME);
-                    for(TrendInfo info : trendInfos){
+                    for (TrendInfo info : trendInfos) {
                         TextView lottyTitleTextView = new TextView(getContext());
                         lottyTitleTextView.setTextSize(18);
                         lottyTitleTextView.setTextColor(getResources().getColor(R.color.black));
@@ -138,7 +142,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         mContainerLottyTitle.addView(lottyTitleTextView, layoutParams);
                         lottyTitleTextView.setOnClickListener(FcTrendsInfoFragment.this);
-                        if(info.getName().equals(selectTitle)){
+                        if (info.getName().equals(selectTitle)) {
                             mTextSelectTitle = lottyTitleTextView;
                             lottyTitleTextView.setTextSize(20);
                             lottyTitleTextView.setTextColor(getResources().getColor(R.color.red));
@@ -146,6 +150,12 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
                         }
                     }
                 }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mProgressLoad.setVisibility(View.GONE);
+                ToastUtils.showToast("发生错误，请重试");
             }
         });
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -143,7 +144,8 @@ public class InitFragment extends AppBaseFragment{
                 //关掉当前页面
                 getActivity().finish();
             }else{
-                x.image().bind(mImgInit, ConstData.LOTTY_UPLOAD_BACKGROUND);
+                ImageOptions options = new ImageOptions.Builder().setLoadingDrawableId(R.drawable.launchimage).setFailureDrawableId(R.drawable.launchimage).build();
+                x.image().bind(mImgInit, ConstData.LOTTY_UPLOAD_BACKGROUND, options);
                 new UpdateProgressDialog(getContext()).show();
                 /*new AlertDialog.Builder(getContext()).setCancelable(false).setTitle("更新提示")
                         .setMessage("有新版本，是否现在更新？").setPositiveButton("是", new DialogInterface.OnClickListener() {

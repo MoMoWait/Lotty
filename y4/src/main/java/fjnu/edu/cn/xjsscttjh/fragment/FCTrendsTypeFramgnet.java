@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -36,6 +37,10 @@ public class FCTrendsTypeFramgnet extends AppBaseFragment{
     @ViewInject(R.id.grid_trends_type)
     GridView mGridTrendsType;
 
+    @ViewInject(R.id.progress_load)
+    ProgressBar mProgressLoad;
+
+
     private TrendInfoLoadTask mLoadTask;
 
     @Nullable
@@ -52,10 +57,11 @@ public class FCTrendsTypeFramgnet extends AppBaseFragment{
 
     private void loadData(){
         mLoadTask = new TrendInfoLoadTask(this);
+        mProgressLoad.setVisibility(View.VISIBLE);
         mLoadTask.execute();
     }
 
-    static class TrendInfoLoadTask extends AsyncTask<String, Integer, List<TrendInfo>>{
+    private static class TrendInfoLoadTask extends AsyncTask<String, Integer, List<TrendInfo>>{
 
         private WeakReference<FCTrendsTypeFramgnet> mFragment;
 
@@ -72,6 +78,7 @@ public class FCTrendsTypeFramgnet extends AppBaseFragment{
         protected void onPostExecute(final List<TrendInfo> trendInfos) {
            final FCTrendsTypeFramgnet fragment = mFragment.get();
            if(fragment != null && fragment.getContext() != null && fragment.isCanUpadteUI()){
+               fragment.mProgressLoad.setVisibility(View.GONE);
                FcTrendTypeAdapter fcTrendTypeAdapter = new FcTrendTypeAdapter(fragment.getContext(), R.layout.adapter_all_lottery, trendInfos);
                fragment.mGridTrendsType.setAdapter(fcTrendTypeAdapter);
                fragment.mGridTrendsType.setOnItemClickListener(new AdapterView.OnItemClickListener() {

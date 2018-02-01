@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -37,7 +38,8 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
 
     @ViewInject(R.id.web_info)
     private WebView mWebInfo;
-
+    @ViewInject(R.id.progress_load)
+    ProgressBar mProgressLoad;
     private String mLoadUrl;
 
     @Nullable
@@ -88,6 +90,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
+               // mProgressLoad.setVisibility(View.GONE);
                 pageFinished(view, url);
                 super.onPageFinished(view, url);
 
@@ -99,6 +102,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
         //if(isInformationUrl)
         //    mLoadUrl += "?from=client";
         //mWebInfo.loadUrl(mLoadUrl);
+        mProgressLoad.setVisibility(View.VISIBLE);
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
@@ -107,11 +111,13 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
+                mProgressLoad.setVisibility(View.GONE);
                 mWebInfo.loadDataWithBaseURL("http://www.es123.com/", s, "text/html;charset=UTF-8", null, null);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
+                mProgressLoad.setVisibility(View.GONE);
                 ToastUtils.showToast("发生错误，请重试");
             }
         });
