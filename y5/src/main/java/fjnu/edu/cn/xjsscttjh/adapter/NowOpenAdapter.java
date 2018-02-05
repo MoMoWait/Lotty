@@ -47,11 +47,11 @@ public class NowOpenAdapter extends ArrayAdapter<NowOpenInfo> {
         ViewHolder holder = (ViewHolder) itemView.getTag();
         if(holder == null){
             holder = new ViewHolder();
-            holder.imgLotty = itemView.findViewById(R.id.img_lotty);
-            holder.textLottyTitle = itemView.findViewById(R.id.text_lotty_title);
-            holder.textLottyNo = itemView.findViewById(R.id.text_lotty_no);
-            holder.textLottyDate = itemView.findViewById(R.id.text_lotty_date);
-            holder.layoutLottyNumber = itemView.findViewById(R.id.layout_lotty_number);
+            holder.imgLotty = (ImageView) itemView.findViewById(R.id.img_lotty);
+            holder.textLottyTitle = (TextView) itemView.findViewById(R.id.text_lotty_title);
+            holder.textLottyNo = (TextView) itemView.findViewById(R.id.text_lotty_no);
+            holder.textLottyDate = (TextView) itemView.findViewById(R.id.text_lotty_date);
+            holder.layoutLottyNumber = (LinearLayout) itemView.findViewById(R.id.layout_lotty_number);
             itemView.setTag(holder);
         }
         NowOpenInfo info = getItem(position);

@@ -1,10 +1,12 @@
 package fjnu.edu.cn.xjsscttjh.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -15,9 +17,11 @@ import org.xutils.x;
 import java.util.List;
 
 import fjnu.edu.cn.xjsscttjh.R;
+import fjnu.edu.cn.xjsscttjh.activity.HistoryOpenActivity;
 import fjnu.edu.cn.xjsscttjh.adapter.NowOpenAdapter;
 import fjnu.edu.cn.xjsscttjh.base.AppBaseFragment;
 import fjnu.edu.cn.xjsscttjh.bean.NowOpenInfo;
+import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import fjnu.edu.cn.xjsscttjh.utils.LottyDataGetUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -60,10 +64,20 @@ public class NowOpenFragment extends AppBaseFragment{
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<NowOpenInfo>>() {
             @Override
-            public void accept(List<NowOpenInfo> nowOpenInfos) throws Exception {
+            public void accept(final List<NowOpenInfo> nowOpenInfos) throws Exception {
                 mProgressLoad.setVisibility(View.GONE);
                 NowOpenAdapter adapter = new NowOpenAdapter(getContext(), R.layout.adapter_now_open, nowOpenInfos);
                 mListNowOpen.setAdapter(adapter);
+                mListNowOpen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        NowOpenInfo itemInfo = nowOpenInfos.get(position);
+                        Intent intent = new Intent(getContext(), HistoryOpenActivity.class);
+                        intent.putExtra(ConstData.IntentKey.LOTTERY_NAME, itemInfo.getTitle());
+                        intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, itemInfo.getTitle() + "-" + "历史开奖");
+                        startActivity(intent);
+                    }
+                });
             }
         }, new Consumer<Throwable>() {
             @Override

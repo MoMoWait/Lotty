@@ -43,8 +43,8 @@ public class ToolAdapter extends ArrayAdapter<ToolInfo> {
             itemParams.height = ConstData.SCREEN_WIDTH / 3;
             itemView.setLayoutParams(itemParams);
         }
-        TextView textDes = itemView.findViewById(R.id.text_des);
-        ImageView imgTool = itemView.findViewById(R.id.img_head);
+        TextView textDes = (TextView) itemView.findViewById(R.id.text_des);
+        ImageView imgTool = (ImageView) itemView.findViewById(R.id.img_head);
         ViewGroup.LayoutParams imgParams = imgTool.getLayoutParams();
         imgParams.width = ConstData.SCREEN_WIDTH / 6;
         imgParams.height = ConstData.SCREEN_WIDTH / 6;

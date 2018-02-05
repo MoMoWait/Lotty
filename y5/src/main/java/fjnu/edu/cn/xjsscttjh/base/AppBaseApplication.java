@@ -1,12 +1,9 @@
 package fjnu.edu.cn.xjsscttjh.base;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.text.TextUtils;
-
-
 import org.xutils.x;
-
-//import cn.jpush.android.api.JPushInterface;
-import java.util.ArrayList;
 import java.util.Date;
 
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
@@ -19,6 +16,13 @@ import momo.cn.edu.fjnu.androidutils.utils.StorageUtils;
  */
 
 public class AppBaseApplication extends BaseApplication {
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

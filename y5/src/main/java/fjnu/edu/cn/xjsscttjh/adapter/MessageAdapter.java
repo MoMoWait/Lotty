@@ -44,8 +44,8 @@ public class MessageAdapter extends ArrayAdapter<Message>{
             itemView = mInflater.inflate(mResource, parent, false);
         if(itemView.getTag() == null){
             ViewHolder holder = new ViewHolder();
-            holder.imgPic = itemView.findViewById(R.id.img_head);
-            holder.textDes = itemView.findViewById(R.id.text_summary);
+            holder.imgPic = (ImageView) itemView.findViewById(R.id.img_head);
+            holder.textDes = (TextView) itemView.findViewById(R.id.text_summary);
             itemView.setTag(holder);
         }
         ViewHolder itemHolder = (ViewHolder) itemView.getTag();

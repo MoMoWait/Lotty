@@ -1,19 +1,23 @@
 package fjnu.edu.cn.xjsscttjh.utils;
 
+import android.text.TextUtils;
 import android.util.Log;
-
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
+import java.util.Set;
+import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ForecastInfo;
 import fjnu.edu.cn.xjsscttjh.bean.NowOpenInfo;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
@@ -54,7 +58,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
 
@@ -75,7 +80,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
         }catch (Exception e){
@@ -103,6 +109,8 @@ public class LottyDataGetUtils {
                 for(int i = 0; i < titleElements.size(); ++i){
                     Element itemTitleElement = titleElements.get(i);
                     String lottyTitle = itemTitleElement.text();
+                    if("重庆时时彩".equals(lottyTitle))
+                        continue;
                     Log.i(TAG, "getAllForecastInfoByFC->lottyTitle:" + lottyTitle);
                     List<ForecastInfo> itemForecastInfos = new ArrayList<>();
                     Elements liElements = currAllElements.get(i + 1).children().get(1).children();
@@ -176,7 +184,8 @@ public class LottyDataGetUtils {
                 String head = itemTrElement.child(4).text();
                 String tip = itemTrElement.child(7).text();
                 NowOpenInfo info = new NowOpenInfo(title, no, openDate, number, head, tip);
-                infos.add(info);
+                if(!"重庆时时彩".equals(info.getTitle()))
+                    infos.add(info);
             }
 
         } catch (Exception e) {
@@ -194,5 +203,110 @@ public class LottyDataGetUtils {
             }
         }
         return infos;
+    }
+
+    /**
+     * 从发彩网抓取历史开奖信息
+     * @return
+     */
+    public static Map<String, List<ColorInfo>> getHistoryOpenInfoByFc(){
+        Map<String, List<ColorInfo>> infoMap = new LinkedHashMap<>();
+        Map<String, String> urls = new LinkedHashMap<>();
+        urls.put("双色球", "http://www.es123.com/history/ssq/");
+        urls.put("大乐透", "http://www.es123.com/history/dlt/");
+        urls.put("福彩3D", "http://www.es123.com/history/fc3d/");
+        urls.put("重庆时时彩", "http://www.es123.com/ssc/");
+        urls.put("七星彩", "http://www.es123.com/history/qxc/");
+        urls.put("七乐彩", "http://www.es123.com/history/qlc/");
+        urls.put("排列3", "http://www.es123.com/history/pl3/");
+        urls.put("排列5", "http://www.es123.com/history/pl5/");
+        urls.put("15选5", "http://www.es123.com/history/l15x5/");
+        Set<String> titles = urls.keySet();
+        for(String title :titles){
+            Log.i(TAG, "getHistoryOpenInfoByFc->title:" + title);
+            String url = urls.get(title);
+            if(title.equals("重庆时时彩")){
+                //重庆时时彩页面特俗
+                try{
+                    SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                    String openDate = sf.format(new Date());
+                    //动态网页数据的抓取调用服务器
+                    Connection connection = Jsoup.connect("http://120.24.18.183:8080/DyParseWebService/servlet/DyParseServlet");
+                    connection.data("url", url);
+                    Document sscDocument =   connection.post();
+                    Elements sscTrElements = sscDocument.body().getElementById("draw_result").children();
+                    int sscTrSize = sscTrElements.size();
+                    Log.i(TAG, "sscTrSize:" + sscTrSize);
+                    List<ColorInfo> sscInfos = new ArrayList<>();
+                    for(int i = 0; i < sscTrSize; i++){
+                        Elements sscTdElements = sscTrElements.get(i).children();
+                        int sscTdSize = sscTdElements.size();
+                        for(int k = 0; k < sscTdSize; k += 2){
+                            ColorInfo sscInfo = new ColorInfo();
+                            String sscNo = sscTdElements.get(k).text();
+                            if(TextUtils.isEmpty(sscNo))
+                                break;
+                            sscInfo.setIssueNo(sscNo + "期");
+                            Elements  strongElements = sscTdElements.get(k+1).children();
+                            StringBuilder sscBuilder = new StringBuilder();
+                            for(Element strongElement : strongElements){
+                                sscBuilder.append(" ").append(strongElement.text());
+                            }
+                            sscInfo.setNumber(sscBuilder.toString().trim());
+                            sscInfo.setOpenDate(openDate);
+                            sscInfos.add(sscInfo);
+
+                        }
+                    }
+                    Collections.sort(sscInfos, new Comparator<ColorInfo>() {
+                        @Override
+                        public int compare(ColorInfo o1, ColorInfo o2) {
+                            return o2.getIssueNo().compareTo(o1.getIssueNo());
+                        }
+                    });
+                    infoMap.put(title, sscInfos);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                continue;
+            }
+            try{
+                Document document = Jsoup.connect(url).get();
+                Elements trElements = document.body().getElementsByClass("lt_kaijiang_table").get(0).child(0).child(0).children();
+                int trSize = trElements.size();
+                List<ColorInfo> colorInfos = new ArrayList<>();
+                for(int i = 1; i < trSize; ++i){
+                    Element trElement = trElements.get(i);
+                    ColorInfo colorInfo = new ColorInfo();
+                    colorInfo.setIssueNo(trElement.child(0).text());
+                    colorInfo.setOpenDate(trElement.child(1).text());
+                    Elements liElements = trElement.child(2).child(0).child(0).children();
+                    StringBuilder builder = new StringBuilder();
+                    for(Element liElement : liElements){
+                        builder.append(" ").append(liElement.text());
+                    }
+                    colorInfo.setNumber(builder.toString().trim());
+                    colorInfos.add(colorInfo);
+                }
+                infoMap.put(title, colorInfos);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
+        return infoMap;
+    }
+
+    public static String getForcaestInfoByFc(String url){
+        try{
+            Document document = Jsoup.connect(url).get();
+            return document.body().getElementsByClass("zx_seq_con_left").get(0).getElementsByTag("p").outerHtml();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

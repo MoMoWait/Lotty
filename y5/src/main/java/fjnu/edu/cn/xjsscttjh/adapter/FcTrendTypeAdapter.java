@@ -45,9 +45,9 @@ public class FcTrendTypeAdapter extends ArrayAdapter<TrendInfo> {
         ViewHolder holder = (ViewHolder) itemView.getTag();
         if(holder == null){
             holder = new ViewHolder();
-            holder.itemImg = itemView.findViewById(R.id.img_lottery_type);
+            holder.itemImg = (ImageView) itemView.findViewById(R.id.img_lottery_type);
             holder.itemImg.setPadding(SizeUtils.dp2px(20),SizeUtils.dp2px(20),SizeUtils.dp2px(20),SizeUtils.dp2px(20));
-            holder.itemText = itemView.findViewById(R.id.text_lottery_name);
+            holder.itemText = (TextView) itemView.findViewById(R.id.text_lottery_name);
             itemView.setTag(holder);
         }
         TrendInfo itemInfo = getItem(position);

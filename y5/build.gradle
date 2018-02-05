@@ -4,12 +4,13 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "cn.zs.good"
+        applicationId "cn.jx.hello"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 3
         versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
@@ -27,7 +28,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -35,16 +44,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
-    testCompile 'junit:junit:4.12'
+    //testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile project(':androidutils')
     compile 'org.xutils:xutils:3.5.0'
-    compile 'cn.jiguang.sdk:jpush:3.0.3'
-    compile 'cn.jiguang.sdk:jcore:1.1.1'
+    //compile 'cn.jiguang.sdk:jpush:3.0.3'
+    //compile 'cn.jiguang.sdk:jcore:1.1.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.4'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    compile files('libs/mysql-connector-java-5.0.8-bin.jar')
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'org.jsoup:jsoup:1.10.3'
+    compile 'com.android.support:multidex:1.0.2'
 }

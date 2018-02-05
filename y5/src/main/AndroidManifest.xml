@@ -15,10 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="APP_CHANNEL" android:value="cai33" />
-        <!-- Tell Cocos2dxActivity the name of our .so -->
-        <meta-data android:name="android.app.lib_name"
-            android:value="cocos2dlua" />
         <activity
             android:name="fjnu.edu.cn.xjsscttjh.activity.MainActivity"
             android:screenOrientation="portrait">
@@ -115,6 +111,25 @@
         <activity
             android:name="fjnu.edu.cn.xjsscttjh.activity.FcTrendChartActivity"
             android:screenOrientation="landscape"
+            android:label="">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.HistoryOpenActivity"
+            android:screenOrientation="portrait"
+            android:label="">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.ForcaestInfoDisplayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

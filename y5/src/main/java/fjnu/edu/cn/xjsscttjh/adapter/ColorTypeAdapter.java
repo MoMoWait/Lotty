@@ -24,7 +24,7 @@ public class ColorTypeAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View itemView = super.getView(position, convertView, parent);
-        TextView textView = itemView.findViewById(android.R.id.text1);
+        TextView textView = (TextView) itemView.findViewById(android.R.id.text1);
         textView.setTextSize(18);
         return itemView;
     }
@@ -32,7 +32,7 @@ public class ColorTypeAdapter extends ArrayAdapter {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View dropDownView = super.getDropDownView(position, convertView, parent);
-        TextView textView = dropDownView.findViewById(android.R.id.text1);
+        TextView textView = (TextView) dropDownView.findViewById(android.R.id.text1);
         textView.setTextSize(18);
         return dropDownView;
     }

@@ -98,4 +98,6 @@
     <string name="enter_train_tip">请输入车次</string>
     <string name="trainno_error">未知车次</string>
     <string name="color_info">彩讯</string>
+    <string name="more">\></string>
+    <string name="forcaest">预测</string>
 </resources>

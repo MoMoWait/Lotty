@@ -37,7 +37,7 @@ public abstract class AppBaseFragment extends BaseFragment {
      * 设置中间文字
      */
     public void setActionBarCenterText(String text){
-        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.action_bar);
         AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
         textTitle.setText(text);
         ViewGroup.LayoutParams params = textTitle.getLayoutParams();
@@ -52,7 +52,7 @@ public abstract class AppBaseFragment extends BaseFragment {
      * 使中间标题栏居中
      */
     public void makeActionBarCenterText(){
-        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.action_bar);
         AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
         ViewGroup.LayoutParams params = textTitle.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -65,7 +65,7 @@ public abstract class AppBaseFragment extends BaseFragment {
      * 添加右侧文字
      */
     public TextView addActionBarRightText(String text){
-        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.action_bar);
         AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
         float titleSize = textTitle.getTextSize();
         int titleColor = textTitle.getCurrentTextColor();
@@ -85,7 +85,7 @@ public abstract class AppBaseFragment extends BaseFragment {
      * @param rightTextView
      */
     public void removeActionBarText(TextView rightTextView){
-        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.action_bar);
         toolbar.removeView(rightTextView);
     }
 
@@ -103,7 +103,7 @@ public abstract class AppBaseFragment extends BaseFragment {
     }
 
     public float getDefaultTitleSize(){
-        Toolbar toolbar = getActivity().findViewById(R.id.action_bar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.action_bar);
         AppCompatTextView textTitle = (AppCompatTextView) toolbar.getChildAt(0);
         return textTitle.getTextSize();
     }

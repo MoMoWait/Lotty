@@ -17,6 +17,7 @@ import fjnu.edu.cn.xjsscttjh.fragment.ColorInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.DiscoveryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ExchangeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.FCTrendsTypeFramgnet;
+import fjnu.edu.cn.xjsscttjh.fragment.ForcaestInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MessageFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MyFragment;
@@ -87,11 +88,11 @@ public class ConstData {
     /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{NowOpenFragment.class, AllLotteryFragment.class, FCTrendsTypeFramgnet.class, MyFragment.class};
+    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{NowOpenFragment.class, FCTrendsTypeFramgnet.class, ForcaestInfoFragment.class, MyFragment.class};
     /**
      * 底部导航项的文字显示
      */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.realtime_color),  CommonValues.application.getString(R.string.other), CommonValues.application.getString(R.string.discovery),  CommonValues.application.getString(R.string.my)};
+    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.forcaest), CommonValues.application.getString(R.string.my)};
     /**
      * 标题文字，可自定义
      */
@@ -117,7 +118,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片正常显示
      */
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.category_normal, R.mipmap.discovery_normal, R.mipmap.my_normal};
+    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.discovery_normal, R.mipmap.message_normal, R.mipmap.my_normal};
     /**
      * 底部导航栏的文字正常显示
      */
@@ -129,7 +130,7 @@ public class ConstData {
     /**
      * 底部导航栏的图片选中显示
      */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_green,   R.mipmap.category_select_green, R.mipmap.discovery_select_green, R.mipmap.my_select_green};
+    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_green, R.mipmap.discovery_select_green, R.mipmap.message_select_green, R.mipmap.my_select_green};
     /**
      * TAB项的文字是否显示
      */
@@ -167,6 +168,9 @@ public class ConstData {
         String LOTTERY_ID = "lottery_id";
         String LOTTERY_NAME = "lottery_name";
         String LOTTY_TREND_INFOS= "lotty_trend_infos";
+        String WEB_LOAD_CONTENT = "web_load_content";
+        String WEB_LOAD_TIME = "web_load_time";
+        String WEB_LOAD_TITLE = "web_load_title";
     }
 
     public interface SharedKey{

@@ -49,9 +49,9 @@ public class LotteryDisplayAdapter extends ArrayAdapter<ColorInfo> {
             itemView = mInflater.inflate(mResourceId, parent, false);
         }
         ColorInfo itemColorInfo = getItem(position);
-        TextView oneColorText = itemView.findViewById(R.id.text_time);
-        TextView twoColorText = itemView.findViewById(R.id.text_issueno);
-        LinearLayout layoutLuckyNumber = itemView.findViewById(R.id.layout_lucky_number);
+        TextView oneColorText = (TextView) itemView.findViewById(R.id.text_time);
+        TextView twoColorText = (TextView) itemView.findViewById(R.id.text_issueno);
+        LinearLayout layoutLuckyNumber = (LinearLayout) itemView.findViewById(R.id.layout_lucky_number);
         if(itemColorInfo != null){
             oneColorText.setText(itemColorInfo.getOpenDate());
             twoColorText.setText(itemColorInfo.getIssueNo());

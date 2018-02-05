@@ -42,9 +42,9 @@ public class ColorAdapter extends ArrayAdapter<ColorInfo> {
             itemView = mInflater.inflate(mResourceId, parent, false);
         }
         ColorInfo itemColorInfo = getItem(position);
-        TextView oneColorText = itemView.findViewById(R.id.text_time);
-        TextView twoColorText = itemView.findViewById(R.id.text_issueno);
-        TextView threeColorText = itemView.findViewById(R.id.text_number);
+        TextView oneColorText = (TextView) itemView.findViewById(R.id.text_time);
+        TextView twoColorText = (TextView) itemView.findViewById(R.id.text_issueno);
+        TextView threeColorText = (TextView) itemView.findViewById(R.id.text_number);
         if(itemColorInfo != null){
             oneColorText.setText("时间：" + itemColorInfo.getOpenDate());
             twoColorText.setText("期号：" + itemColorInfo.getIssueNo());

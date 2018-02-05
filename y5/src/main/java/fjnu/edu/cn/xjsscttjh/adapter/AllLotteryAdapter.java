@@ -36,8 +36,8 @@ public class AllLotteryAdapter extends ArrayAdapter<LotteryInfo> {
             itemView = convertView;
         else
             itemView = LayoutInflater.from(mContext).inflate(mResource, parent ,false);
-        ImageView imgLotteryType = itemView.findViewById(R.id.img_lottery_type);
-        TextView textLotteryName = itemView.findViewById(R.id.text_lottery_name);
+        ImageView imgLotteryType = (ImageView) itemView.findViewById(R.id.img_lottery_type);
+        TextView textLotteryName = (TextView) itemView.findViewById(R.id.text_lottery_name);
         LotteryInfo itemLotteryInfo = getItem(position);
         imgLotteryType.setImageResource(itemLotteryInfo.getImgRes());
         textLotteryName.setText(itemLotteryInfo.getDes());

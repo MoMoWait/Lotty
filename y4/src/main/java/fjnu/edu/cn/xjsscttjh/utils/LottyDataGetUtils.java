@@ -54,7 +54,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
 
@@ -75,7 +76,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
         }catch (Exception e){

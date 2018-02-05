@@ -47,4 +47,16 @@
         android:layout_below="@+id/text_lotty_no"
         android:layout_toRightOf="@+id/img_lotty"/>
 
+    <TextView
+        android:id="@+id/text_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/more"
+        android:textColor="#8f000000"
+        android:textSize="16sp"
+        android:scaleY="2"/>
+
 </RelativeLayout>
