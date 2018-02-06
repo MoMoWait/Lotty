@@ -141,8 +141,8 @@ public class LottyDataGetUtils {
                 if(!"show".equals(itemElement.id())){
                     itemElement.attr("style", "display: none");
                 }else{
-                    Elements liElements =  itemElement.children().get(0).children().get(0).getElementsByTag("tr");
-                    liElements.get(liElements.size() - 1).attr("style", "display: none");
+                    Elements trElements =  itemElement.getElementsByTag("tr");
+                    trElements.get(trElements.size() - 1).attr("style", "display: none");
                 }
             }
             return document.outerHtml();

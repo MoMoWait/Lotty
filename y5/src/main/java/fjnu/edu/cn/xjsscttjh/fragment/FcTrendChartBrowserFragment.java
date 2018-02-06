@@ -84,6 +84,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                mProgressLoad.setVisibility(View.VISIBLE);
                 pageStarted(view, url, favicon);
                 super.onPageStarted(view, url, favicon);
 
@@ -91,7 +92,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-               // mProgressLoad.setVisibility(View.GONE);
+                mProgressLoad.setVisibility(View.GONE);
                 pageFinished(view, url);
                 super.onPageFinished(view, url);
 

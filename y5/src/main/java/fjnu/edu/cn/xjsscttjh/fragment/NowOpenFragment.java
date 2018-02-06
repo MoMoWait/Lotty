@@ -74,6 +74,7 @@ public class NowOpenFragment extends AppBaseFragment{
                         NowOpenInfo itemInfo = nowOpenInfos.get(position);
                         Intent intent = new Intent(getContext(), HistoryOpenActivity.class);
                         intent.putExtra(ConstData.IntentKey.LOTTERY_NAME, itemInfo.getTitle());
+                        intent.putExtra(ConstData.IntentKey.LOTTY_HISTORY_OPEN_URL, ConstData.FC_LOTTY_HISTORY_URLS.get(itemInfo.getTitle()));
                         intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, itemInfo.getTitle() + "-" + "历史开奖");
                         startActivity(intent);
                     }

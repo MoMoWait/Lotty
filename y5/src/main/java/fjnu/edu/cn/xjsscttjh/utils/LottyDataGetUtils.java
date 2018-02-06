@@ -19,8 +19,10 @@ import java.util.Map;
 import java.util.Set;
 import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ForecastInfo;
+import fjnu.edu.cn.xjsscttjh.bean.HistoryOpenInfo;
 import fjnu.edu.cn.xjsscttjh.bean.NowOpenInfo;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
+import fjnu.edu.cn.xjsscttjh.data.ConstData;
 
 /**
  * Created by GaoFei on 2018/1/28.
@@ -147,8 +149,8 @@ public class LottyDataGetUtils {
                 if(!"show".equals(itemElement.id())){
                     itemElement.attr("style", "display: none");
                 }else{
-                    Elements liElements =  itemElement.children().get(0).children().get(0).getElementsByTag("tr");
-                    liElements.get(liElements.size() - 1).attr("style", "display: none");
+                    Elements trElements =  itemElement.getElementsByTag("tr");
+                    trElements.get(trElements.size() - 1).attr("style", "display: none");
                 }
             }
             return document.outerHtml();
@@ -191,16 +193,8 @@ public class LottyDataGetUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<TrendInfo> allTrendInfos = getAllTrendInfoByFC();
-        if(allTrendInfos != null && allTrendInfos.size() > 0){
-            for(NowOpenInfo info : infos){
-                for(TrendInfo trendInfo : allTrendInfos){
-                    if(info.getTitle().equals(trendInfo.getName())){
-                        info.setImgUrl(trendInfo.getImgUrl());
-                        break;
-                    }
-                }
-            }
+        for(NowOpenInfo info : infos){
+            info.setImgUrl(ConstData.FC_LOTTY_IMG_URLS.get(info.getTitle()));
         }
         return infos;
     }
@@ -308,5 +302,85 @@ public class LottyDataGetUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取发彩网的历史开奖信息
+     * @param title
+     * @param url
+     * @return
+     */
+    public static List<ColorInfo> getFcHistoryOpenInfos(String title, String url){
+        if(title.equals("重庆时时彩")){
+            //重庆时时彩页面特俗
+            try{
+                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                String openDate = sf.format(new Date());
+                //动态网页数据的抓取调用服务器
+                Connection connection = Jsoup.connect("http://120.24.18.183:8080/DyParseWebService/servlet/DyParseServlet");
+                connection.data("url", url);
+                Document sscDocument =   connection.post();
+                Elements sscTrElements = sscDocument.body().getElementById("draw_result").children();
+                int sscTrSize = sscTrElements.size();
+                Log.i(TAG, "sscTrSize:" + sscTrSize);
+                List<ColorInfo> sscInfos = new ArrayList<>();
+                for(int i = 0; i < sscTrSize; i++){
+                    Elements sscTdElements = sscTrElements.get(i).children();
+                    int sscTdSize = sscTdElements.size();
+                    for(int k = 0; k < sscTdSize; k += 2){
+                        ColorInfo sscInfo = new ColorInfo();
+                        String sscNo = sscTdElements.get(k).text();
+                        if(TextUtils.isEmpty(sscNo))
+                            break;
+                        sscInfo.setIssueNo(sscNo + "期");
+                        Elements  strongElements = sscTdElements.get(k+1).children();
+                        StringBuilder sscBuilder = new StringBuilder();
+                        for(Element strongElement : strongElements){
+                            sscBuilder.append(" ").append(strongElement.text());
+                        }
+                        sscInfo.setNumber(sscBuilder.toString().trim());
+                        sscInfo.setOpenDate(openDate);
+                        sscInfos.add(sscInfo);
+
+                    }
+                }
+                Collections.sort(sscInfos, new Comparator<ColorInfo>() {
+                    @Override
+                    public int compare(ColorInfo o1, ColorInfo o2) {
+                        return o2.getIssueNo().compareTo(o1.getIssueNo());
+                    }
+                });
+                return sscInfos;
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }else{
+            try{
+                Document document = Jsoup.connect(url).get();
+                Elements trElements = document.body().getElementsByClass("lt_kaijiang_table").get(0).child(0).child(0).children();
+                int trSize = trElements.size();
+                List<ColorInfo> colorInfos = new ArrayList<>();
+                for(int i = 1; i < trSize; ++i){
+                    Element trElement = trElements.get(i);
+                    ColorInfo colorInfo = new ColorInfo();
+                    colorInfo.setIssueNo(trElement.child(0).text());
+                    colorInfo.setOpenDate(trElement.child(1).text());
+                    Elements liElements = trElement.child(2).child(0).child(0).children();
+                    StringBuilder builder = new StringBuilder();
+                    for(Element liElement : liElements){
+                        builder.append(" ").append(liElement.text());
+                    }
+                    colorInfo.setNumber(builder.toString().trim());
+                    colorInfos.add(colorInfo);
+                }
+                return colorInfos;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return new ArrayList<>();
+
     }
 }

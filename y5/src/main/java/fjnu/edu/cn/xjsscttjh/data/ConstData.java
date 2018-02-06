@@ -1,15 +1,22 @@
 package fjnu.edu.cn.xjsscttjh.data;
 
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import fjnu.edu.cn.xjsscttjh.R;
 import fjnu.edu.cn.xjsscttjh.bean.ColorInfo;
 import fjnu.edu.cn.xjsscttjh.bean.ColorType;
 import fjnu.edu.cn.xjsscttjh.bean.LotteryInfo;
+import fjnu.edu.cn.xjsscttjh.bean.TabItem;
 import fjnu.edu.cn.xjsscttjh.bean.ToolInfo;
 import fjnu.edu.cn.xjsscttjh.fragment.AllLotteryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.AreaCodeSearchFragment;
@@ -55,7 +62,9 @@ public class ConstData {
     /**应用宝*/
     public static final String APP_CONTEN_URL = "http://www.27305.com/frontApi/getAboutUs?appid=11221726";
     public static final String ABOUT_MESSAGE = "您身边的时时彩查询助手";
-    //极速数据的APP_KEY
+    /**
+     * 极速数据的APPKey
+     */
     public static final String JS_APP_KEY = "400d09f5f73fbc71";
     public static final String VIDEO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300209&src=0000100001%7C6000003060";
     //开奖数据获取
@@ -75,28 +84,35 @@ public class ConstData {
     public static final String HEADER_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300202&src=0000100001%7C6000003060";
     public static final String COLOR_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300204&src=0000100001%7C6000003060";
     public static final String WELFARE_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8020&busiCode=300206&src=0000100001%7C6000003060";
-    public static final String POLICY_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300210&src=0000100001%7C6000003060";
-    public static final String REWARD_INFO_URL = "http://m.zhcw.com/clienth5.do?transactionType=300304&src=0000100001%7C6000003060";
-    public static final String ONE_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=4&num=20";
-    public static final String TWO_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=11&num=20";
-    public static final String THREE_COLOR_URL = "http://api.jisuapi.com/caipiao/history?appkey=debc0bd758c77fe1&caipiaoid=3&num=20";
+    /**
+     * 启动页面停留时间（ms）
+     */
     public static final long INIT_TIME = 1500;
     /**
      * 屏幕宽
      */
     public static final int SCREEN_WIDTH = DeviceInfoUtils.getScreenWidth(CommonValues.application);
     /**
+     * 底部导航栏的文字正常显示
+     */
+    public static final int TAB_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_normal_text_color);
+    /**
+     * 底部导航栏的文字选中显示
+     */
+    public static final int TAB_SELECT_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_select_text_green);
+    /**
+     * 底部导航项
+     */
+    public static final TabItem[] TAB_ITEMS = new TabItem[]{
+      new TabItem(CommonValues.application.getString(R.string.home), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, NowOpenFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.discovery), R.mipmap.discovery_normal, R.mipmap.discovery_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, FCTrendsTypeFramgnet.class),
+            new TabItem(CommonValues.application.getString(R.string.forcaest), R.mipmap.message_normal, R.mipmap.message_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, ForcaestInfoFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.my), R.mipmap.my_normal, R.mipmap.my_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, MyFragment.class)
+    };
+    /**
      * ManiActivity内容页面
      */
-    public static final Class<?>[] CONTENT_FRAGMENTS = new Class[]{NowOpenFragment.class, FCTrendsTypeFramgnet.class, ForcaestInfoFragment.class, MyFragment.class};
-    /**
-     * 底部导航项的文字显示
-     */
-    public static final String[] TAB_TEXTS = new String[]{CommonValues.application.getString(R.string.home), CommonValues.application.getString(R.string.discovery), CommonValues.application.getString(R.string.forcaest), CommonValues.application.getString(R.string.my)};
-    /**
-     * 标题文字，可自定义
-     */
-    public static final String[] TITLE_TEXTS = TAB_TEXTS;
+    public static final List<Class<? extends Fragment>> CONTENT_FRAGMENTS = getContentFragmentClasss();
     /**
      * 彩票类型
      */
@@ -114,23 +130,6 @@ public class ConstData {
             new LotteryInfo(R.mipmap.logo_qlc, 13, "七乐彩"),
             new LotteryInfo(R.mipmap.logo_ssq, 11, "双色球"),
     };
-
-    /**
-     * 底部导航栏的图片正常显示
-     */
-    public static final int[] TAB_IMGS = new int[]{R.mipmap.home_normal, R.mipmap.discovery_normal, R.mipmap.message_normal, R.mipmap.my_normal};
-    /**
-     * 底部导航栏的文字正常显示
-     */
-    public static final int TAB_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_normal_text_color);
-    /**
-     * 底部导航栏的文字选中显示
-     */
-    public static final int TAB_SELECT_TEXT_COLOR = ContextCompat.getColor(CommonValues.application, R.color.tab_select_text_green);
-    /**
-     * 底部导航栏的图片选中显示
-     */
-    public static final int[] TAB_SELECT_IMGS = new int[]{R.mipmap.home_select_green, R.mipmap.discovery_select_green, R.mipmap.message_select_green, R.mipmap.my_select_green};
     /**
      * TAB项的文字是否显示
      */
@@ -155,10 +154,25 @@ public class ConstData {
             new ToolInfo(R.mipmap.shouji, CommonValues.application.getString(R.string.phone_area), PhoneCodeSearchFragment.class.getName(), CommonValues.application.getString(R.string.phone_area)),
             new ToolInfo(R.mipmap.train, CommonValues.application.getString(R.string.train_search), TrainSearchFragment.class.getName(), CommonValues.application.getString(R.string.train_search)),
             new ToolInfo(R.mipmap.weather, CommonValues.application.getString(R.string.weather_search), WeatherSearchFragment.class.getName(), CommonValues.application.getString(R.string.weather_search))};
+    /**
+     * 发彩网的彩票图标URL
+     */
+    public static final Map<String, String> FC_LOTTY_IMG_URLS = getFcLottyImgUrls();
+    /**
+     * 发彩网开奖历史URL
+     */
+    public static final Map<String, String> FC_LOTTY_HISTORY_URLS = getFcLottyHistoryUrls();
+    /**
+     * 异步块执行结果
+     */
     public interface TaskResult{
         int SUCC = 0;
         int FAILED = -1;
     }
+
+    /**
+     * 组件之间传递的key
+     */
     public interface IntentKey{
         String WEB_LOAD_URL = "web_load_url";
         String IS_INFORMATION_URL = "is_information_url";
@@ -167,12 +181,16 @@ public class ConstData {
         String TARGET_ACTIVITY_LABEL = "target_activity_label";
         String LOTTERY_ID = "lottery_id";
         String LOTTERY_NAME = "lottery_name";
+        String LOTTY_HISTORY_OPEN_URL = "lotty_history_open_url";
         String LOTTY_TREND_INFOS= "lotty_trend_infos";
         String WEB_LOAD_CONTENT = "web_load_content";
         String WEB_LOAD_TIME = "web_load_time";
         String WEB_LOAD_TITLE = "web_load_title";
     }
 
+    /**
+     * SharedPreference共享Key
+     */
     public interface SharedKey{
         String USER_NAME = "user_name";
         /**马甲包安装时间*/
@@ -181,6 +199,9 @@ public class ConstData {
         String LOTTY_APK_MD5 = "lotty_apk_md5";
     }
 
+    /**
+     * 远程数据库配置
+     */
     public interface DataBaseData{
         String USER_NAME = "GaoFei";
         String PASSWORD = "gf6548914";
@@ -194,5 +215,53 @@ public class ConstData {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2018, 1, 10, 0, 0, 0);
         return calendar.getTime().getTime();
+    }
+
+    /**
+     * 获取内容Fragment类
+     * @return
+     */
+    private static List<Class<? extends Fragment>> getContentFragmentClasss(){
+        List<Class<? extends Fragment>> tabFragmentClasss = new ArrayList<>();
+        for(TabItem tabItem : ConstData.TAB_ITEMS){
+            tabFragmentClasss.add(tabItem.getFragmentClass());
+        }
+        return tabFragmentClasss;
+    }
+
+    /**
+     * 发彩网对应的彩票图标URL
+     * @return
+     */
+    private static Map<String, String> getFcLottyImgUrls(){
+        Map<String, String> imgUrlMap = new LinkedHashMap<>();
+        imgUrlMap.put("双色球", "http://www.es123.com/images/lett_ssq.png");
+        imgUrlMap.put("福彩3D", "http://www.es123.com/images/lett_fc3d.png");
+        //imgUrlMap.put("重庆时时彩", "http://www.es123.com/images/lett_cqssc.png");
+        imgUrlMap.put("七乐彩", "http://www.es123.com/images/lett_qlc.png");
+        imgUrlMap.put("15选5", "http://www.es123.com/images/lett_l15x5.png");
+        imgUrlMap.put("大乐透", "http://www.es123.com/images/lett_dlt.png");
+        imgUrlMap.put("七星彩", "http://www.es123.com/images/lett_qxc.png");
+        imgUrlMap.put("排列3", "http://www.es123.com/images/lett_pl3.png");
+        imgUrlMap.put("排列5", "http://www.es123.com/images/lett_pl5.png");
+        return imgUrlMap;
+    }
+
+    /**
+     * 发彩网对应的彩票历史开奖地址
+     * @return
+     */
+    private static Map<String, String> getFcLottyHistoryUrls(){
+        Map<String, String> historyMap = new LinkedHashMap<>();
+        historyMap.put("双色球", "http://www.es123.com/history/ssq/");
+        historyMap.put("福彩3D", "http://www.es123.com/history/fc3d/");
+        //historyMap.put("重庆时时彩", "http://www.es123.com/ssc/");
+        historyMap.put("七乐彩", "http://www.es123.com/history/qlc/");
+        historyMap.put("15选5", "http://www.es123.com/history/l15x5/");
+        historyMap.put("大乐透", "http://www.es123.com/history/dlt/");
+        historyMap.put("七星彩", "http://www.es123.com/history/qxc/");
+        historyMap.put("排列3", "http://www.es123.com/history/pl3/");
+        historyMap.put("排列5", "http://www.es123.com/history/pl5/");
+        return historyMap;
     }
 }

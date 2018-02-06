@@ -41,6 +41,9 @@ public class HistoryOpenFragment extends AppBaseFragment{
     @ViewInject(R.id.progress_load)
     private ProgressBar mProgressLoad;
 
+    private String mTitle;
+    private String mUrl;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,13 +57,13 @@ public class HistoryOpenFragment extends AppBaseFragment{
     }
 
     private void loadData(){
+        mTitle = getActivity().getIntent().getStringExtra(ConstData.IntentKey.LOTTERY_NAME);
+        mUrl = getActivity().getIntent().getStringExtra(ConstData.IntentKey.LOTTY_HISTORY_OPEN_URL);
         mProgressLoad.setVisibility(View.VISIBLE);
         Observable.create(new ObservableOnSubscribe<List<ColorInfo>>() {
             @Override
             public void subscribe(ObservableEmitter<List<ColorInfo>> e) throws Exception {
-                String title = getActivity().getIntent().getStringExtra(ConstData.IntentKey.LOTTERY_NAME);
-                Map<String, List<ColorInfo>>  colorInfoMap = LottyDataGetUtils.getHistoryOpenInfoByFc();
-                e.onNext(colorInfoMap.get(title));
+                e.onNext(LottyDataGetUtils.getFcHistoryOpenInfos(mTitle, mUrl));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<ColorInfo>>() {
             @Override

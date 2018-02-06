@@ -68,6 +68,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
         webSettings.setSupportZoom(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setUserAgentString("Mozilla/5.0");
+        webSettings.setLoadWithOverviewMode(true);
         updateWebSettings(webSettings);
         //加载需要显示的网页
         //mWebInfo.loadUrl(mLoadUrl);
@@ -83,6 +84,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                mProgressLoad.setVisibility(View.VISIBLE);
                 pageStarted(view, url, favicon);
                 super.onPageStarted(view, url, favicon);
 
@@ -91,6 +93,7 @@ public class FcTrendChartBrowserFragment extends AppBaseFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                // mProgressLoad.setVisibility(View.GONE);
+                mProgressLoad.setVisibility(View.GONE);
                 pageFinished(view, url);
                 super.onPageFinished(view, url);
 

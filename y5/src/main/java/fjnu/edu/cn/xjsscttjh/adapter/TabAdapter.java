@@ -19,7 +19,7 @@ public class TabAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         try {
-            return (Fragment) ConstData.CONTENT_FRAGMENTS[position].newInstance();
+            return ConstData.TAB_ITEMS[position].getFragmentClass().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -31,6 +31,6 @@ public class TabAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return ConstData.CONTENT_FRAGMENTS.length;
+        return ConstData.TAB_ITEMS.length;
     }
 }

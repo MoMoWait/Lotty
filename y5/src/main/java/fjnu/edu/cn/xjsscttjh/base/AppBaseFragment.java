@@ -1,6 +1,7 @@
 package fjnu.edu.cn.xjsscttjh.base;
 
 import android.app.AlertDialog;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -14,9 +15,12 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import fjnu.edu.cn.xjsscttjh.R;
+import fjnu.edu.cn.xjsscttjh.bean.TabItem;
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
 import fjnu.edu.cn.xjsscttjh.view.TitleView;
 import momo.cn.edu.fjnu.androidutils.base.BaseFragment;
@@ -119,7 +123,7 @@ public abstract class AppBaseFragment extends BaseFragment {
                 TitleView titleView = new TitleView(getContext());
                 actionBar.setCustomView(titleView);
                 //不属于主Activity的Fragment才需要设置标题
-                if( !Arrays.asList(ConstData.CONTENT_FRAGMENTS).contains(getClass())){
+                if( !ConstData.CONTENT_FRAGMENTS.contains(getClass())){
                     titleView.setCenterTitle(getActivityLable());
                 }
             }

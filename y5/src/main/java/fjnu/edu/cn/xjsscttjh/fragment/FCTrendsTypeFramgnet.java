@@ -17,7 +17,9 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import fjnu.edu.cn.xjsscttjh.R;
 import fjnu.edu.cn.xjsscttjh.activity.FcTrendsInfoActivity;
@@ -66,12 +68,20 @@ public class FCTrendsTypeFramgnet extends AppBaseFragment{
         private WeakReference<FCTrendsTypeFramgnet> mFragment;
 
         public TrendInfoLoadTask(FCTrendsTypeFramgnet framgnet){
-            mFragment = new WeakReference<FCTrendsTypeFramgnet>(framgnet);
+            mFragment = new WeakReference<>(framgnet);
         }
 
         @Override
         protected List<TrendInfo> doInBackground(String... strings) {
-            return LottyDataGetUtils.getAllTrendInfoByFC();
+            List<TrendInfo> trendInfos = new ArrayList<>();
+            Set<String> titles = ConstData.FC_LOTTY_IMG_URLS.keySet();
+            for(String title : titles){
+                TrendInfo trendInfo = new TrendInfo();
+                trendInfo.setName(title);
+                trendInfo.setImgUrl(ConstData.FC_LOTTY_IMG_URLS.get(title));
+                trendInfos.add(trendInfo);
+            }
+            return trendInfos;
         }
 
         @Override

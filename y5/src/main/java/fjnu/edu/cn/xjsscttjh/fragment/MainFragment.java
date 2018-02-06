@@ -91,9 +91,9 @@ public class MainFragment extends AppBaseFragment{
      * 加载底部菜单项
      */
     private void loadBottomUI(){
-        for(int i = 0; i < ConstData.CONTENT_FRAGMENTS.length; ++i){
+        for(int i = 0; i < ConstData.TAB_ITEMS.length; ++i){
             TabItemView tabItemView = new TabItemView(getContext());
-            tabItemView.setImgText(ConstData.TAB_IMGS[i], ConstData.TAB_TEXTS[i]);
+            tabItemView.setImgText(ConstData.TAB_ITEMS[i].getNormalImg(), ConstData.TAB_ITEMS[i].getTitle());
             LinearLayout.LayoutParams tabItemParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
             mLayoutTab.addView(tabItemView, tabItemParams);
         }
@@ -107,11 +107,11 @@ public class MainFragment extends AppBaseFragment{
         for(int i = 0; i < mLayoutTab.getChildCount(); ++i){
             TabItemView tabItemView = (TabItemView) mLayoutTab.getChildAt(i);
             if(i == position){
-                tabItemView.setBottomImg(ConstData.TAB_SELECT_IMGS[position]);
-                tabItemView.setDesTextColor(ConstData.TAB_SELECT_TEXT_COLOR);
+                tabItemView.setBottomImg(ConstData.TAB_ITEMS[i].getSelectImg());
+                tabItemView.setDesTextColor(ConstData.TAB_ITEMS[i].getSelectTextColor());
             }else{
-                tabItemView.setBottomImg(ConstData.TAB_IMGS[i]);
-                tabItemView.setDesTextColor(ConstData.TAB_TEXT_COLOR);
+                tabItemView.setBottomImg(ConstData.TAB_ITEMS[i].getNormalImg());
+                tabItemView.setDesTextColor(ConstData.TAB_ITEMS[i].getNormalTextColor());
             }
         }
     }
@@ -125,7 +125,7 @@ public class MainFragment extends AppBaseFragment{
             ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
             if(actionBar != null){
                 TitleView titleView = (TitleView) actionBar.getCustomView();
-               titleView.setCenterTitle(ConstData.TITLE_TEXTS[position]);
+                titleView.setCenterTitle(ConstData.TAB_ITEMS[position].getTitle());
             }
         }
     }
