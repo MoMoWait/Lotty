@@ -137,6 +137,7 @@ public abstract class AppBaseFragment extends BaseFragment {
         canUpadteUI = true;
     }
 
+
     public boolean isCanUpadteUI() {
         return canUpadteUI;
     }

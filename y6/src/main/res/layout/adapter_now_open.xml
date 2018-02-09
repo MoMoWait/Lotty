@@ -8,12 +8,12 @@
         android:id="@+id/img_lotty"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="gone"
         android:scaleType="fitXY"/>
     <TextView
         android:id="@+id/text_lotty_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/img_lotty"
         android:paddingLeft="10dp"
         android:text="@string/app_name"
         android:textColor="@android:color/black"
@@ -22,7 +22,7 @@
         android:id="@+id/text_lotty_no"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_toRightOf="@+id/img_lotty"
+        android:layout_below="@+id/text_lotty_title"
         android:layout_alignBottom="@+id/img_lotty"
         android:paddingLeft="10dp"
         android:text="@string/app_name"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">时时彩预测软件</string>
+    <string name="app_name">时时彩计划平台</string>
     <string name="app_name_software">时时彩助手软件</string>
     <string name="realtime_color">时时彩</string>
     <string name="other">其他</string>
@@ -100,4 +100,12 @@
     <string name="color_info">彩讯</string>
     <string name="more">\></string>
     <string name="forcaest">预测</string>
+    <string name="trend_any">走势分析</string>
+    <string name="open_lotty">开奖</string>
+    <string name="forecast">预测</string>
+    <string name="lotty_forecast">彩票预测</string>
+    <string name="join_method">玩法</string>
+    <string name="ohter">其他</string>
+    <string name="newst_lotty_open">最新彩票开奖</string>
+    <string name="join_method_introduce">玩法介绍</string>
 </resources>

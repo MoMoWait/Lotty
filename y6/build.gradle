@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "cn.jx.hello"
+        applicationId "cn.fk.little"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 3

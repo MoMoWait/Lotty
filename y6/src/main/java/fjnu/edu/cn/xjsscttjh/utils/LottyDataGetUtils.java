@@ -294,10 +294,47 @@ public class LottyDataGetUtils {
         return infoMap;
     }
 
+    /**
+     * 从发彩网抓取预测消息
+     * @param url
+     * @return
+     */
     public static String getForcaestInfoByFc(String url){
         try{
             Document document = Jsoup.connect(url).get();
             return document.body().getElementsByClass("zx_seq_con_left").get(0).getElementsByTag("p").outerHtml();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 从网易彩票抓取预测消息
+     * @param url
+     * @return
+     */
+    public static String getForcaestInfoByWY(String url){
+        try{
+            Document document = Jsoup.connect(url).get();
+            return document.body().getElementById("endText").outerHtml();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 从网易彩票抓取玩法介绍
+     * @param url
+     * @return
+     */
+    public static String getJoinMethodByWY(String url){
+        try{
+            Document document = Jsoup.connect(url).get();
+            return document.body().getElementsByClass("help_t_int").get(0).outerHtml();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -382,5 +419,33 @@ public class LottyDataGetUtils {
         }
         return new ArrayList<>();
 
+    }
+
+    /**
+     *  从网易彩票网站抓取预测消息
+     * @param url
+     * @return
+     */
+    public static List<ForecastInfo> getForcaestInfosByWy(String url){
+        List<ForecastInfo> infos = new ArrayList<>();
+        try{
+            Element bodyElement = Jsoup.connect(url).get().body();
+            Elements ulElements = bodyElement.getElementsByClass("zx_list_l").get(0).child(2).children();
+            for(int i = 0; i < ulElements.size() - 1; ++i){
+                Element ulElement = ulElements.get(i);
+                Elements liElements = ulElement.children();
+                for(int j = 0; j < liElements.size(); ++j){
+                    Element liElement = liElements.get(j);
+                    ForecastInfo info = new ForecastInfo();
+                    info.setTitle(liElement.child(0).text());
+                    info.setUrl(liElement.child(0).child(0).attr("href"));
+                    info.setTime(liElement.child(1).text());
+                    infos.add(info);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return infos;
     }
 }

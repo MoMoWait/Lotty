@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <ProgressBar
+        android:id="@+id/progress_load"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/text_trend_any"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_51"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:text="@string/trend_any"/>
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/grid_trends_type"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/text_trend_any"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="100dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/text_other"
+        android:layout_below="@+id/grid_trends_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_51"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:text="@string/other"/>
+    <LinearLayout
+        android:id="@+id/layout_other_container"
+        android:layout_below="@+id/text_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/text_open_lotty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/open_lotty"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/text_forecast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/forecast"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/text_join_method"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/join_method"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

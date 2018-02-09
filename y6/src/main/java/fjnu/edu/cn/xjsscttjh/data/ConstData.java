@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +26,7 @@ import fjnu.edu.cn.xjsscttjh.fragment.DiscoveryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ExchangeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.FCTrendsTypeFramgnet;
 import fjnu.edu.cn.xjsscttjh.fragment.ForcaestInfoFragment;
+import fjnu.edu.cn.xjsscttjh.fragment.HomeAllFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MessageFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.MyFragment;
@@ -104,10 +106,11 @@ public class ConstData {
      * 底部导航项
      */
     public static final TabItem[] TAB_ITEMS = new TabItem[]{
-      new TabItem(CommonValues.application.getString(R.string.home), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, NowOpenFragment.class),
-            new TabItem(CommonValues.application.getString(R.string.discovery), R.mipmap.discovery_normal, R.mipmap.discovery_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, FCTrendsTypeFramgnet.class),
-            new TabItem(CommonValues.application.getString(R.string.forcaest), R.mipmap.message_normal, R.mipmap.message_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, ForcaestInfoFragment.class),
-            new TabItem(CommonValues.application.getString(R.string.my), R.mipmap.my_normal, R.mipmap.my_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, MyFragment.class)
+            new TabItem(CommonValues.application.getString(R.string.app_name), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, HomeAllFragment.class),
+            //new TabItem(CommonValues.application.getString(R.string.home), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, NowOpenFragment.class),
+            //new TabItem(CommonValues.application.getString(R.string.discovery), R.mipmap.discovery_normal, R.mipmap.discovery_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, FCTrendsTypeFramgnet.class),
+            //new TabItem(CommonValues.application.getString(R.string.forcaest), R.mipmap.message_normal, R.mipmap.message_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, ForcaestInfoFragment.class),
+            //new TabItem(CommonValues.application.getString(R.string.my), R.mipmap.my_normal, R.mipmap.my_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, MyFragment.class)
     };
     /**
      * ManiActivity内容页面
@@ -162,6 +165,18 @@ public class ConstData {
      * 发彩网开奖历史URL
      */
     public static final Map<String, String> FC_LOTTY_HISTORY_URLS = getFcLottyHistoryUrls();
+
+    /**
+     * 网易彩票预测URL
+     */
+    public static final Map<String, String> WY_LOTTY_FORECAST_URLS =  getWyLottyForecastUrls();
+
+    /**
+     * 网易彩票玩法URL
+     */
+    public static final Map<String, String> WY_LOTTY_JOIN_METHOD_URLS =  getWyLottyJoinMethodUrls();
+
+
     /**
      * 异步块执行结果
      */
@@ -213,7 +228,7 @@ public class ConstData {
      */
     private static long getCheckUpdateTime(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2018, 1, 10, 0, 0, 0);
+        calendar.set(2018, 1, 10, 20, 0, 0);
         return calendar.getTime().getTime();
     }
 
@@ -263,5 +278,35 @@ public class ConstData {
         historyMap.put("排列3", "http://www.es123.com/history/pl3/");
         historyMap.put("排列5", "http://www.es123.com/history/pl5/");
         return historyMap;
+    }
+
+    /**
+     * 彩票网易彩票预测结果
+     * @return
+     */
+    private static Map<String, String> getWyLottyForecastUrls(){
+        Map<String, String> forecastUrls = new LinkedHashMap<>();
+        forecastUrls.put("双色球",  "http://cai.163.com/ssq/");
+        forecastUrls.put("大乐透",  "http://cai.163.com/dlt/");
+        forecastUrls.put("福彩3D",  "http://cai.163.com/3d/");
+        forecastUrls.put("其他",  "http://cai.163.com/pl3/");
+        return forecastUrls;
+    }
+
+    /**
+     * 网易彩票玩法介绍URL
+     * @return
+     */
+    private static Map<String, String> getWyLottyJoinMethodUrls(){
+        Map<String, String> joinMethodUrls = new LinkedHashMap<>();
+        joinMethodUrls.put("双色球",  "http://caipiao.163.com/help/14/0626/15/9VM6M0GT00754KN4_2.html");
+        joinMethodUrls.put("福彩3D",  "http://caipiao.163.com/help/14/0626/16/9VM94FTF00754KN4_2.html");
+        joinMethodUrls.put("大乐透",  "http://caipiao.163.com/help/14/0626/19/9VMJ9SNH00754KN4_2.html");
+        joinMethodUrls.put("七星彩",  "http://caipiao.163.com/help/14/0627/10/9VO6LSTN00754KN4_2.html");
+        joinMethodUrls.put("七乐彩",  "http://caipiao.163.com/help/14/0627/10/9VO70C3O00754KN4_2.html");
+        joinMethodUrls.put("排列3",  "http://caipiao.163.com/help/14/0627/10/9VO7NNQF00754KN4_2.html");
+        joinMethodUrls.put("排列5",  "http://caipiao.163.com/help/14/0627/11/9VO8PB7F00754KN4_2.html");
+        joinMethodUrls.put("15选5",  "http://caipiao.163.com/help/14/0627/12/9VOCNUHO00754KN4_2.html");
+        return joinMethodUrls;
     }
 }

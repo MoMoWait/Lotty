@@ -135,6 +135,52 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.LottyNowOpenActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/newst_lotty_open">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.FCTrendsTypeActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/trend_any">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.ForecastInfoActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/lotty_forecast">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.WyJoinMethodActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/join_method_introduce">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.WyJoinMethodDisplayActivity"
+            android:screenOrientation="portrait"
+            android:label="">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

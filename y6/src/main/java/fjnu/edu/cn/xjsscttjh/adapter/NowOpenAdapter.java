@@ -55,7 +55,7 @@ public class NowOpenAdapter extends ArrayAdapter<NowOpenInfo> {
             itemView.setTag(holder);
         }
         NowOpenInfo info = getItem(position);
-        x.image().bind(holder.imgLotty, info.getImgUrl());
+        //x.image().bind(holder.imgLotty, info.getImgUrl());
         holder.textLottyTitle.setText(info.getTitle());
         holder.textLottyNo.setText(info.getNo());
         holder.textLottyDate.setText(info.getOpenDate());
@@ -65,10 +65,10 @@ public class NowOpenAdapter extends ArrayAdapter<NowOpenInfo> {
             //添加中奖号码
             TextView numberView = new TextView(mContext);
             numberView.setText(itemNumber);
-            numberView.setTextColor(mContext.getResources().getColor(R.color.white));
+            numberView.setTextColor(mContext.getResources().getColor(R.color.black));
             numberView.setTextSize(15);
             numberView.setGravity(Gravity.CENTER);
-            numberView.setBackgroundResource(R.drawable.luck_number_back_red);
+            numberView.setBackgroundResource(R.drawable.luck_number_back_red_ring);
             holder.layoutLottyNumber.addView(numberView);
             LinearLayout.LayoutParams numberParams = (LinearLayout.LayoutParams)numberView.getLayoutParams();
             numberParams.leftMargin = SizeUtils.dp2px(6);

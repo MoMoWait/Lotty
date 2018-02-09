@@ -56,7 +56,7 @@ public class HistoryOpenDisplayAdapter extends LotteryDisplayAdapter{
             String[] numbers = itemColorInfo.getNumber().split("\\s+");
             for(String itemNumber: numbers){
                 TextView luckyNumberView = new TextView(mContext);
-                luckyNumberView.setBackgroundResource(R.drawable.luck_number_back_red);
+                luckyNumberView.setBackgroundResource(R.drawable.luck_number_back_blue);
                 luckyNumberView.setTextColor(mContext.getResources().getColor(R.color.white));
                 luckyNumberView.setGravity(Gravity.CENTER);
                 luckyNumberView.setText(itemNumber);

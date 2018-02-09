@@ -51,7 +51,7 @@ public class FcTrendTypeAdapter extends ArrayAdapter<TrendInfo> {
             itemView.setTag(holder);
         }
         TrendInfo itemInfo = getItem(position);
-        x.image().bind(holder.itemImg, itemInfo.getImgUrl());
+        //x.image().bind(holder.itemImg, itemInfo.getImgUrl());
         holder.itemText.setText(itemInfo.getName());
         return  itemView;
     }

@@ -1,10 +1,14 @@
 package fjnu.edu.cn.xjsscttjh.fragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.xutils.view.annotation.ContentView;
@@ -42,8 +46,8 @@ public class ForcaestInfoDisplayFragment extends AppBaseFragment{
     @ViewInject(R.id.text_time)
     private TextView mTextTime;
 
-    @ViewInject(R.id.text_content)
-    private TextView mTextContent;
+    @ViewInject(R.id.web_info)
+    private WebView mWebInfo;
 
     @Nullable
     @Override
@@ -54,6 +58,49 @@ public class ForcaestInfoDisplayFragment extends AppBaseFragment{
     @Override
     public void init() {
         super.init();
+        mWebInfo.setFocusable(true);
+        mWebInfo.setFocusableInTouchMode(true);
+        mWebInfo.requestFocus();
+        WebSettings webSettings = mWebInfo.getSettings();
+        webSettings.setDomStorageEnabled(true);
+        //设置WebView属性，能够执行Javascript脚本
+        webSettings.setJavaScriptEnabled(true);
+        //设置可以访问文件
+        webSettings.setAllowFileAccess(true);
+        //设置支持缩放
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        //支持缩放
+        webSettings.setSupportZoom(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setUserAgentString("Mozilla/5.0");
+        //webSettings.setLoadWithOverviewMode(true);
+        //加载需要显示的网页
+        //mWebInfo.loadUrl(mLoadUrl);
+        //设置Web视图
+        mWebInfo.setWebViewClient(new WebViewClient(){
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //ToastUtils.showToast("shouldOverrideUrlLoading1");
+                //mWebInfo.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                mProgressLoad.setVisibility(View.VISIBLE);
+                super.onPageStarted(view, url, favicon);
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                mProgressLoad.setVisibility(View.GONE);
+                super.onPageFinished(view, url);
+
+            }
+        });
         loadData();
     }
 
@@ -65,7 +112,7 @@ public class ForcaestInfoDisplayFragment extends AppBaseFragment{
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
-                e.onNext(LottyDataGetUtils.getForcaestInfoByFc(mUrl));
+                e.onNext(LottyDataGetUtils.getForcaestInfoByWY(mUrl));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
             @Override
@@ -73,7 +120,8 @@ public class ForcaestInfoDisplayFragment extends AppBaseFragment{
                 mProgressLoad.setVisibility(View.GONE);
                 mTextTitle.setText(Html.fromHtml("<font>" + mTitle + "</font>"));
                 mTextTime.setText(Html.fromHtml("<font>" + mTime + "</font>"));
-                mTextContent.setText(Html.fromHtml(result));
+                mWebInfo.loadDataWithBaseURL("http://cai.163.com/", result, "text/html;charset=UTF-8", null, null);
+                //mTextContent.setText(Html.fromHtml(result));
 
             }
         }, new Consumer<Throwable>() {

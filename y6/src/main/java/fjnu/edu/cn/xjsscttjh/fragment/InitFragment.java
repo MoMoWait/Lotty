@@ -22,6 +22,7 @@ import org.xutils.x;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ import fjnu.edu.cn.xjsscttjh.view.UpdateProgressDialog;
 import momo.cn.edu.fjnu.androidutils.utils.NetWorkUtils;
 import momo.cn.edu.fjnu.androidutils.utils.PackageUtils;
 import momo.cn.edu.fjnu.androidutils.utils.StorageUtils;
+import momo.cn.edu.fjnu.androidutils.utils.ToastUtils;
 
 /**
  * 初始化封面
@@ -182,6 +184,8 @@ public class InitFragment extends AppBaseFragment{
                // Log.i(TAG, "trendInfoList:" + trendInfoList);
                // Map<String, List<ForecastInfo>> forecastMap = LottyDataGetUtils.getAllForecastInfoByFC();
                // Log.i(TAG, "forecastMap:" + forecastMap);
+                List<ForecastInfo> forecastInfos = LottyDataGetUtils.getForcaestInfosByWy("http://cai.163.com/ssq/");
+                Log.i(TAG, "InitTask->forecastInfos:" + forecastInfos);
                 TimeUnit.MILLISECONDS.sleep(ConstData.INIT_TIME);
                 return ConstData.TaskResult.SUCC;
             } catch (Exception e) {
