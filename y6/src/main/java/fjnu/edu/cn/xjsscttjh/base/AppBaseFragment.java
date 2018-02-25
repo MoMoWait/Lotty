@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -133,6 +134,7 @@ public abstract class AppBaseFragment extends BaseFragment {
 
     @Override
     public void init() {
+        Log.i(TAG, "init->fragmentClassName:" + getClass().getName());
         initActionBar();
         canUpadteUI = true;
     }

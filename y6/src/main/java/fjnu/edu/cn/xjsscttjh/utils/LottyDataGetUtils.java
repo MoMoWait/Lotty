@@ -94,6 +94,66 @@ public class LottyDataGetUtils {
         return  trendInfoList;
     }
 
+
+    /**
+     * 从网易彩票网站抓取走势消息
+     * @return
+     */
+    public static List<TrendInfo> getAllTrendInfoByWy(){
+        List<TrendInfo> trendInfoList = new ArrayList<>();
+        try{
+            Document document = Jsoup.connect("http://trend.caipiao.163.com/").get();
+            Element fcElement = document.getElementById("fucai_trend1l");
+            Elements trendElements = fcElement.getElementsByClass("fucai_lottery_list clearfix");
+            for(Element itemElement : trendElements){
+                TrendInfo trendInfo = new TrendInfo();
+                Elements logoElements = itemElement.getElementsByClass("fc_list_logo");
+                String imgUrl = logoElements.get(0).getElementsByTag("img").get(0).attr("src");
+                String name = logoElements.get(0).getElementsByTag("span").get(0).text();
+                Elements liElements = itemElement.getElementsByClass("clearfix").get(0).getElementsByTag("li");
+                Map<String, String> liMap = new LinkedHashMap<>();
+                for(Element itemLiElemnt : liElements){
+                    String trendName = itemLiElemnt.getElementsByTag("a").get(0).text();
+                    String trendUrl = itemElement.getElementsByTag("a").attr("href");
+                    liMap.put(trendName, trendUrl);
+                }
+                trendInfo.setImgUrl(imgUrl);
+                trendInfo.setName(name);
+                trendInfo.setTrendUrl(liMap);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
+            }
+
+
+            Element tcElement = document.getElementsByClass("fucai_trend").get(1);
+            trendElements = tcElement.getElementsByClass("fucai_lottery_list clearfix");
+            for(Element itemElement : trendElements){
+                TrendInfo trendInfo = new TrendInfo();
+                Elements logoElements = itemElement.getElementsByClass("fc_list_logo");
+                String imgUrl = logoElements.get(0).getElementsByTag("img").get(0).attr("src");
+                String name = logoElements.get(0).getElementsByTag("span").get(0).text();
+                Elements liElements = itemElement.getElementsByClass("clearfix").get(0).getElementsByTag("li");
+                Map<String, String> liMap = new LinkedHashMap<>();
+                for(Element itemLiElemnt : liElements){
+                    String trendName = itemLiElemnt.getElementsByTag("a").get(0).text();
+                    String trendUrl = itemElement.getElementsByTag("a").attr("href");
+                    liMap.put(trendName, trendUrl);
+                }
+                trendInfo.setImgUrl(imgUrl);
+                trendInfo.setName(name);
+                trendInfo.setTrendUrl(liMap);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            //no handle
+            Log.i(TAG, "getAllTrendInfoByFC->exception:" + e);
+        }
+        return  trendInfoList;
+    }
+
     /**
      * 从发彩网抓取预测消息
      * @return

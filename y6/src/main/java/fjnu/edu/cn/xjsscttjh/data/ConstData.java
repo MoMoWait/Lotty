@@ -228,7 +228,7 @@ public class ConstData {
      */
     private static long getCheckUpdateTime(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2018, 1, 10, 20, 0, 0);
+        calendar.set(2018, 2, 13, 20, 0, 0);
         return calendar.getTime().getTime();
     }
 
