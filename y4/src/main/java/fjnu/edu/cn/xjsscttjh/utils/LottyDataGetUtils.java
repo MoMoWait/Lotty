@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import fjnu.edu.cn.xjsscttjh.bean.ForecastInfo;
+import fjnu.edu.cn.xjsscttjh.bean.NowOpenInfo;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
 
 /**
@@ -52,7 +54,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
 
@@ -73,7 +76,8 @@ public class LottyDataGetUtils {
                 trendInfo.setImgUrl(imgUrl);
                 trendInfo.setName(name);
                 trendInfo.setTrendUrl(liMap);
-                trendInfoList.add(trendInfo);
+                if(!"重庆时时彩".equals(name))
+                    trendInfoList.add(trendInfo);
             }
 
         }catch (Exception e){
@@ -137,8 +141,8 @@ public class LottyDataGetUtils {
                 if(!"show".equals(itemElement.id())){
                     itemElement.attr("style", "display: none");
                 }else{
-                    Elements liElements =  itemElement.children().get(0).children().get(0).getElementsByTag("tr");
-                    liElements.get(liElements.size() - 1).attr("style", "display: none");
+                    Elements trElements =  itemElement.getElementsByTag("tr");
+                    trElements.get(trElements.size() - 1).attr("style", "display: none");
                 }
             }
             return document.outerHtml();
@@ -147,5 +151,38 @@ public class LottyDataGetUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 从发彩网抓取当前获奖的彩票信息
+     * @return
+     */
+    public static List<NowOpenInfo> getNowOpenInfosByFc(){
+        List<NowOpenInfo> infos = new ArrayList<>();
+        try {
+            Document document = Jsoup.connect("http://www.es123.com/draw_notice/").get();
+            Elements trElements = document.body().getElementsByClass("kj_table_con").get(0).child(0).child(0).children();
+            int trSize =  trElements.size();
+            for(int i = 1; i < trSize; ++i){
+                Element itemTrElement = trElements.get(i);
+                String title = itemTrElement.child(0).text();
+                String no = itemTrElement.child(1).text();
+                String openDate = itemTrElement.child(2).text();
+                StringBuilder builder = new StringBuilder();
+                Elements liElements = itemTrElement.child(3).child(0).child(0).children();
+                for(Element itemLiElement : liElements){
+                    builder.append(" ").append(itemLiElement.text());
+                }
+                String number = builder.toString();
+                String head = itemTrElement.child(4).text();
+                String tip = itemTrElement.child(7).text();
+                NowOpenInfo info = new NowOpenInfo(title, no, openDate, number, head, tip);
+                infos.add(info);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return infos;
     }
 }

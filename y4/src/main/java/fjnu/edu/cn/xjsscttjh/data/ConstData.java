@@ -98,7 +98,7 @@ public class ConstData {
     /**
      * 彩票类型
      */
-    public static ColorType[] COLOR_TYPES = new ColorType[]{ new ColorType(90, "新疆时时彩"),new ColorType(73, "重庆时时彩"), new ColorType(93, "天津时时彩"), new ColorType(134, "云南时时彩")};
+    public static ColorType[] COLOR_TYPES = new ColorType[]{ new ColorType(90, "新疆时时彩"), new ColorType(93, "天津时时彩"), new ColorType(134, "云南时时彩")};
     /**
      * 所有彩票种类
      */

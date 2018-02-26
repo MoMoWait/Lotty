@@ -114,7 +114,7 @@
 
         <activity
             android:name="fjnu.edu.cn.xjsscttjh.activity.FcTrendChartActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:label="">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

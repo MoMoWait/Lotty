@@ -1,4 +1,4 @@
 include ':androidutils', ':racingplan', ':realtimecolor', ':stockhelp'
 include 'BeiJingQuickThree', 'HongKongSixOne', 'HongKongSixTwo'
 include 'bjk3js', 'xy28', 'ssczs', 'ffc', 'ffctz', 'tjssc', 'k3sskjcx'
-include 'y1', 'y2', 'y3', 'b1', 'y4'
+include 'y1', 'y2', 'y3', 'y4', 'b1', 'y5', 'y6'
