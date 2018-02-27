@@ -60,6 +60,7 @@ public class ForcaestInfoFragment extends AppBaseFragment{
         super.init();
     }
 
+    /*
     @Override
     public void initActionBar() {
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
@@ -90,7 +91,7 @@ public class ForcaestInfoFragment extends AppBaseFragment{
             actionBar.addTab(itemTab);
             //actionBar.setSelectedNavigationItem(0);
         }
-    }
+    }*/
 
     private void loadData(final String title){
         mProgressLoad.setVisibility(View.VISIBLE);

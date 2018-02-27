@@ -118,6 +118,15 @@
         </activity>
 
         <activity
+            android:name="fjnu.edu.cn.xjsscttjh.activity.WyTrendChartActivity"
+            android:screenOrientation="landscape"
+            android:label="">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name="fjnu.edu.cn.xjsscttjh.activity.HistoryOpenActivity"
             android:screenOrientation="portrait"
             android:label="">

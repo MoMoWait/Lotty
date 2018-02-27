@@ -25,6 +25,7 @@ import fjnu.edu.cn.xjsscttjh.fragment.ColorInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.DiscoveryFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ExchangeSearchFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.FCTrendsTypeFramgnet;
+import fjnu.edu.cn.xjsscttjh.fragment.FcTrendsInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.ForcaestInfoFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeAllFragment;
 import fjnu.edu.cn.xjsscttjh.fragment.HomeFragment;
@@ -106,11 +107,11 @@ public class ConstData {
      * 底部导航项
      */
     public static final TabItem[] TAB_ITEMS = new TabItem[]{
-            new TabItem(CommonValues.application.getString(R.string.app_name), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, HomeAllFragment.class),
-            //new TabItem(CommonValues.application.getString(R.string.home), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, NowOpenFragment.class),
-            //new TabItem(CommonValues.application.getString(R.string.discovery), R.mipmap.discovery_normal, R.mipmap.discovery_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, FCTrendsTypeFramgnet.class),
-            //new TabItem(CommonValues.application.getString(R.string.forcaest), R.mipmap.message_normal, R.mipmap.message_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, ForcaestInfoFragment.class),
-            //new TabItem(CommonValues.application.getString(R.string.my), R.mipmap.my_normal, R.mipmap.my_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, MyFragment.class)
+            //new TabItem(CommonValues.application.getString(R.string.app_name), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, HomeAllFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.home), R.mipmap.home_normal, R.mipmap.home_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, NowOpenFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.discovery), R.mipmap.discovery_normal, R.mipmap.discovery_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, FcTrendsInfoFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.forcaest), R.mipmap.message_normal, R.mipmap.message_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, ForcaestInfoFragment.class),
+            new TabItem(CommonValues.application.getString(R.string.my), R.mipmap.my_normal, R.mipmap.my_select_green, TAB_TEXT_COLOR, TAB_SELECT_TEXT_COLOR, MyFragment.class)
     };
     /**
      * ManiActivity内容页面

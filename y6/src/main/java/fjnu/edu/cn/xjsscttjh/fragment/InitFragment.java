@@ -180,12 +180,12 @@ public class InitFragment extends AppBaseFragment{
         protected Integer doInBackground(String... params) {
             try {
                 //测试抓取网页数据接口
-               // List<TrendInfo> trendInfoList = LottyDataGetUtils.getAllTrendInfoByFC();
-               // Log.i(TAG, "trendInfoList:" + trendInfoList);
+                List<TrendInfo> trendInfoList = LottyDataGetUtils.getAllTrendInfoByWy();
+                Log.i(TAG, "trendInfoList:" + trendInfoList);
                // Map<String, List<ForecastInfo>> forecastMap = LottyDataGetUtils.getAllForecastInfoByFC();
                // Log.i(TAG, "forecastMap:" + forecastMap);
-                List<ForecastInfo> forecastInfos = LottyDataGetUtils.getForcaestInfosByWy("http://cai.163.com/ssq/");
-                Log.i(TAG, "InitTask->forecastInfos:" + forecastInfos);
+               // List<ForecastInfo> forecastInfos = LottyDataGetUtils.getForcaestInfosByWy("http://cai.163.com/ssq/");
+               // Log.i(TAG, "InitTask->forecastInfos:" + forecastInfos);
                 TimeUnit.MILLISECONDS.sleep(ConstData.INIT_TIME);
                 return ConstData.TaskResult.SUCC;
             } catch (Exception e) {

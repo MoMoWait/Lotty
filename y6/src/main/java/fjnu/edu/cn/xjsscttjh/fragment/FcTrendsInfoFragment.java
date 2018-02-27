@@ -28,6 +28,7 @@ import java.util.Set;
 
 import fjnu.edu.cn.xjsscttjh.R;
 import fjnu.edu.cn.xjsscttjh.activity.FcTrendChartActivity;
+import fjnu.edu.cn.xjsscttjh.activity.WyTrendChartActivity;
 import fjnu.edu.cn.xjsscttjh.base.AppBaseFragment;
 import fjnu.edu.cn.xjsscttjh.bean.TrendInfo;
 import fjnu.edu.cn.xjsscttjh.data.ConstData;
@@ -102,7 +103,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
         mListTrendInfos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), FcTrendChartActivity.class);
+                Intent intent = new Intent(getContext(), WyTrendChartActivity.class);
                 intent.putExtra(ConstData.IntentKey.TARGET_ACTIVITY_LABEL, info.getName() + "-" + trendNames.get(position));
                 intent.putExtra(ConstData.IntentKey.WEB_LOAD_URL, trendUrls.get(position));
                 startActivity(intent);
@@ -118,7 +119,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
         Observable.create(new ObservableOnSubscribe<List<TrendInfo>>() {
             @Override
             public void subscribe(ObservableEmitter<List<TrendInfo>> e) throws Exception {
-                List<TrendInfo> trendInfos = LottyDataGetUtils.getAllTrendInfoByFC();
+                List<TrendInfo> trendInfos = LottyDataGetUtils.getAllTrendInfoByWy();
                 e.onNext(trendInfos);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<TrendInfo>>() {
@@ -132,6 +133,7 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
                     //获取当前选中Title
                     mTrendInfos = trendInfos;
                     String selectTitle = getActivity().getIntent().getStringExtra(ConstData.IntentKey.LOTTERY_NAME);
+                    boolean isFind = false;
                     for (TrendInfo info : trendInfos) {
                         TextView lottyTitleTextView = new TextView(getContext());
                         lottyTitleTextView.setTextSize(18);
@@ -143,12 +145,21 @@ public class FcTrendsInfoFragment extends AppBaseFragment implements View.OnClic
                         mContainerLottyTitle.addView(lottyTitleTextView, layoutParams);
                         lottyTitleTextView.setOnClickListener(FcTrendsInfoFragment.this);
                         if (info.getName().equals(selectTitle)) {
+                            isFind = true;
                             mTextSelectTitle = lottyTitleTextView;
                             lottyTitleTextView.setTextSize(20);
                             lottyTitleTextView.setTextColor(getResources().getColor(R.color.red));
                             update(info);
                         }
                     }
+                    //设置选中第一项
+                    if(!isFind){
+                        mTextSelectTitle =  (TextView) mContainerLottyTitle.getChildAt(0);
+                        mTextSelectTitle.setTextSize(20);
+                        mTextSelectTitle.setTextColor(getResources().getColor(R.color.red));
+                        update(trendInfos.get(0));
+                    }
+
                 }
             }
         }, new Consumer<Throwable>() {

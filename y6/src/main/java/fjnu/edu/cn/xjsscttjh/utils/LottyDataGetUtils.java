@@ -103,49 +103,29 @@ public class LottyDataGetUtils {
         List<TrendInfo> trendInfoList = new ArrayList<>();
         try{
             Document document = Jsoup.connect("http://trend.caipiao.163.com/").get();
-            Element fcElement = document.getElementById("fucai_trend1l");
-            Elements trendElements = fcElement.getElementsByClass("fucai_lottery_list clearfix");
-            for(Element itemElement : trendElements){
+            Elements allElements = document.body().getElementsByClass("chart_center").get(0).children();
+            for(Element itemElement : allElements){
                 TrendInfo trendInfo = new TrendInfo();
-                Elements logoElements = itemElement.getElementsByClass("fc_list_logo");
-                String imgUrl = logoElements.get(0).getElementsByTag("img").get(0).attr("src");
-                String name = logoElements.get(0).getElementsByTag("span").get(0).text();
-                Elements liElements = itemElement.getElementsByClass("clearfix").get(0).getElementsByTag("li");
-                Map<String, String> liMap = new LinkedHashMap<>();
-                for(Element itemLiElemnt : liElements){
-                    String trendName = itemLiElemnt.getElementsByTag("a").get(0).text();
-                    String trendUrl = itemElement.getElementsByTag("a").attr("href");
-                    liMap.put(trendName, trendUrl);
+                String lottyName = itemElement.child(0).child(1).text();
+                lottyName = lottyName.substring(0, lottyName.length() - 3);
+                if(lottyName.equals("重庆时时彩"))
+                    continue;
+                trendInfo.setName(lottyName);
+                Map<String, String> trendMap = new LinkedHashMap<>();
+                Elements dlElements = itemElement.child(1).children();
+                for(Element dlElement : dlElements){
+                    Elements ddElements = dlElement.children();
+                    int ddSize = ddElements.size();
+                    for(int i = 1; i < ddSize; ++i){
+                        Element ddElement = ddElements.get(i);
+                        String title = ddElement.text();
+                        String url = ddElement.child(0).attr("href");
+                        trendMap.put(title,url);
+                    }
                 }
-                trendInfo.setImgUrl(imgUrl);
-                trendInfo.setName(name);
-                trendInfo.setTrendUrl(liMap);
-                if(!"重庆时时彩".equals(name))
-                    trendInfoList.add(trendInfo);
+                trendInfo.setTrendUrl(trendMap);
+                trendInfoList.add(trendInfo);
             }
-
-
-            Element tcElement = document.getElementsByClass("fucai_trend").get(1);
-            trendElements = tcElement.getElementsByClass("fucai_lottery_list clearfix");
-            for(Element itemElement : trendElements){
-                TrendInfo trendInfo = new TrendInfo();
-                Elements logoElements = itemElement.getElementsByClass("fc_list_logo");
-                String imgUrl = logoElements.get(0).getElementsByTag("img").get(0).attr("src");
-                String name = logoElements.get(0).getElementsByTag("span").get(0).text();
-                Elements liElements = itemElement.getElementsByClass("clearfix").get(0).getElementsByTag("li");
-                Map<String, String> liMap = new LinkedHashMap<>();
-                for(Element itemLiElemnt : liElements){
-                    String trendName = itemLiElemnt.getElementsByTag("a").get(0).text();
-                    String trendUrl = itemElement.getElementsByTag("a").attr("href");
-                    liMap.put(trendName, trendUrl);
-                }
-                trendInfo.setImgUrl(imgUrl);
-                trendInfo.setName(name);
-                trendInfo.setTrendUrl(liMap);
-                if(!"重庆时时彩".equals(name))
-                    trendInfoList.add(trendInfo);
-            }
-
         }catch (Exception e){
             e.printStackTrace();
             //no handle
@@ -200,6 +180,11 @@ public class LottyDataGetUtils {
         return forecastMap;
     }
 
+    /**
+     * 提取发彩网走势图表HTML代码
+     * @param url
+     * @return
+     */
     public static String getTrendChardHtmlByFc(String url){
         try{
             Document document = Jsoup.connect(url).get();
@@ -220,6 +205,41 @@ public class LottyDataGetUtils {
         }
         return null;
     }
+
+    /**
+     * 提取网易彩票走势图表HTML代码
+     * @param url
+     * @return
+     */
+    public static String getTrendChardHtmlByWy(String url){
+        try{
+            Document document = Jsoup.connect(url).get();
+           /* Connection connection = Jsoup.connect("http://120.24.18.183:8080/DyParseWebService/servlet/DyParseServlet");
+            connection.data("url", url);
+            Document document =   connection.post();*/
+            Elements allElements = document.body().children();
+            for(Element itemElement : allElements){
+                Log.i(TAG, "getTrendChardHtmlByWy->className:" + itemElement.className());
+                if(!"chartMain ssq_basic".equals(itemElement.className()) && !itemElement.className().contains("chartMain")){
+                    itemElement.attr("style", "display: none");
+                }else{
+                    itemElement.child(0).attr("style", "display: none");
+                    Elements chartElements = itemElement.child(1).children();
+                    for(Element chartElement : chartElements){
+                        if(!chartElement.id().equals("tableAndCanvas"))
+                            chartElement.attr("style", "display: none");
+                    }
+                }
+            }
+            //document.getElementsByClass("")
+            return document.outerHtml();
+            //return document.outerHtml();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     /**
      * 从发彩网抓取当前获奖的彩票信息
